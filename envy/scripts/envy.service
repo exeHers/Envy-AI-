@@ -1,0 +1,17 @@
+[Unit]
+Description=Envy Personal Assistant
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/envy
+Environment="PATH=/opt/envy/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/opt/envy/venv/bin/python3 /opt/envy/envy.py --profile balanced
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

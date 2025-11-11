@@ -1,0 +1,103 @@
+# Envy Personal Assistant Configuration
+# Profile: low, balanced, power
+profile: balanced
+
+# Wake Word Settings
+wake:
+  keyword: "envy"
+  sensitivity: 0.5
+  model_path: "models/vosk-model-small-en-us-0.22"
+  continuous_listening: true
+
+# Speech-to-Text Settings
+stt:
+  engine: "whisper"  # whisper, vosk
+  model: "base"  # tiny, base, small, medium, large
+  model_path: "models/whisper-base"
+  device: "auto"  # auto, cpu, cuda
+  language: "en"
+  streaming: true
+  quantized: true
+
+# Text-to-Speech Settings
+tts:
+  engine: "pyttsx3"  # pyttsx3, coqui
+  voice_id: null  # null = default system voice
+  rate: 150
+  volume: 0.9
+  streaming: true
+
+# LLM Adapter Settings
+llm:
+  provider: "local"  # local, remote_free
+  local:
+    engine: "llama.cpp"  # llama.cpp, onnx
+    model_path: "models/llama-2-7b-chat-q4_0.gguf"
+    context_size: 2048
+    n_gpu_layers: 20  # 0 = CPU only
+    n_threads: 4
+    temperature: 0.7
+    max_tokens: 512
+  remote_free:
+    enabled: false
+    endpoint: "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium"
+    api_key: ""  # Optional, leave empty for free tier
+    timeout: 10
+
+# Resource Limits
+resources:
+  max_cpu_percent: 50  # Max CPU usage percentage
+  max_memory_mb: 4096  # Max memory in MB
+  max_gpu_memory_mb: 6144  # Max GPU memory in MB (8GB - 2GB buffer)
+  skill_timeout_seconds: 30
+
+# Router Settings
+router:
+  intent_classifier: "rule_based"  # rule_based, ml
+  confidence_threshold: 0.6
+  fallback_to_llm: true
+
+# Skills Configuration
+skills:
+  enabled:
+    - CodeSkill
+    - ResearchSkill
+    - SysControlSkill
+    - ReminderSkill
+  require_confirmation:
+    - SysControlSkill
+  sandbox:
+    enabled: true
+    allowed_commands: []  # Empty = no system commands allowed by default
+    allowed_paths: ["workspace"]  # Relative to envy directory
+
+# Web Dashboard
+web:
+  host: "127.0.0.1"
+  port: 8080
+  enable_cors: true
+  log_level: "INFO"
+
+# Logging
+logging:
+  level: "INFO"
+  file: "artifacts/envy.log"
+  console: true
+
+# Security
+security:
+  require_voice_confirmation: true
+  require_dashboard_confirmation: true
+  sandbox_execution: true
+  max_file_size_mb: 10
+
+# Persona
+persona:
+  name: "Envy"
+  tone: "neutral"
+  verbosity: "concise"
+  responses:
+    wake: "Yes?"
+    thinking: "Let me think..."
+    error: "I encountered an error."
+    confirmation: "Are you sure?"
