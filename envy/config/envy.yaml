@@ -1,0 +1,97 @@
+# Envy Personal Assistant Configuration
+
+# Resource profiles: low, balanced, power
+profile: balanced
+
+# Resource limits
+resources:
+  max_cpu_percent: 50  # Max CPU usage (balanced profile)
+  max_memory_mb: 4096  # Max memory in MB
+  max_gpu_memory_mb: 2048  # Max GPU memory in MB (for GTX 1070)
+  use_gpu: true  # Try to use GPU if available
+
+# Wake word settings
+wake_word:
+  keyword: "envy"
+  sensitivity: 0.5  # 0.0 to 1.0, higher = more sensitive
+  model_path: "models/vosk-model-small-en-us-0.15"  # VOSK model path
+  continuous_listening: true
+
+# Speech-to-Text settings
+stt:
+  engine: "vosk"  # Options: vosk, whisper
+  vosk_model_path: "models/vosk-model-small-en-us-0.15"
+  whisper_model: "small"  # tiny, base, small, medium, large
+  use_gpu: false  # GPU for Whisper (if available)
+  streaming: true
+
+# Text-to-Speech settings
+tts:
+  engine: "pyttsx3"  # Options: pyttsx3, coqui
+  voice_id: null  # null = system default
+  rate: 150  # Speech rate (words per minute)
+  volume: 0.9  # 0.0 to 1.0
+  streaming: true
+
+# LLM Adapter settings
+llm:
+  provider: "local"  # Options: local, remote_free
+  local:
+    model_path: "models/llama-2-7b-chat.gguf"  # Path to GGUF model
+    model_type: "llama.cpp"  # llama.cpp, onnx
+    context_size: 2048
+    n_gpu_layers: 20  # GPU layers for llama.cpp
+    use_mmap: true
+    use_mlock: false
+  remote_free:
+    enabled: false  # Set to true to enable free remote fallback
+    endpoint: "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium"
+    api_key: ""  # Optional API key if needed
+    timeout: 30
+  fallback_enabled: true  # Use remote if local fails
+
+# Router settings
+router:
+  intent_classifier: "rule_based"  # Options: rule_based, ml
+  confidence_threshold: 0.7
+  max_response_time: 10  # seconds
+
+# Skills configuration
+skills:
+  enabled:
+    - CodeSkill
+    - ResearchSkill
+    - SysControlSkill
+    - ReminderSkill
+  timeout: 30  # seconds per skill execution
+  sandbox: true  # Sandbox dangerous operations
+  require_confirmation: true  # Require confirmation for destructive actions
+
+# Security settings
+security:
+  allow_system_commands: false  # Require explicit whitelist
+  command_whitelist: []  # Whitened commands (empty = none allowed)
+  require_voice_confirmation: true
+  require_dashboard_confirmation: true
+  sandbox_execution: true
+
+# Web dashboard settings
+web:
+  host: "0.0.0.0"
+  port: 8080
+  enable_cors: true
+  log_level: "info"
+
+# Logging
+logging:
+  level: "INFO"
+  file: "artifacts/envy.log"
+  max_size_mb: 10
+  backup_count: 5
+
+# Persona settings
+persona:
+  name: "Envy"
+  tone: "neutral"
+  verbosity: "concise"  # concise, normal, verbose
+  sardonic_level: 0.3  # 0.0 to 1.0

@@ -1,0 +1,110 @@
+==========================================
+Envy Personal Assistant - Build Summary
+==========================================
+
+Build Date: $(date)
+Status: COMPLETE
+
+DELIVERABLES:
+=============
+
+1. Repository Structure:
+   ✓ envy/ directory with complete source code
+   ✓ services/ - Core microservices (wake_listener, stt_service, tts_service, llm_adapter, router, orchestrator)
+   ✓ skills/ - Modular skill system (CodeSkill, ResearchSkill, SysControlSkill, ReminderSkill, GeneralSkill)
+   ✓ web/ - FastAPI web dashboard
+   ✓ config/ - Configuration system (envy.yaml)
+   ✓ scripts/ - Installation and test scripts
+   ✓ docs/ - Documentation (README, install guides, security)
+
+2. Installers:
+   ✓ install_envy.sh (Linux)
+   ✓ install_envy.bat (Windows)
+   ✓ run_envy_local.sh (Linux runner)
+   ✓ run_envy_local.bat (Windows runner)
+
+3. Service Wrappers:
+   ✓ scripts/envy.service (systemd unit)
+   ✓ Windows service instructions in docs
+
+4. Test Suite:
+   ✓ scripts/run_tests.sh - Automated acceptance tests
+   ✓ scripts/build_test.sh - Build verification tests
+   ✓ scripts/perf-report-gen.sh - Performance reporting
+
+5. Final Package:
+   ✓ envy-ready.zip - Complete package with all artifacts
+
+FEATURES IMPLEMENTED:
+=====================
+
+✓ Wake word detection using VOSK
+✓ Speech-to-Text (VOSK with Whisper fallback)
+✓ Text-to-Speech (pyttsx3)
+✓ LLM adapter (local llama.cpp + free remote fallback)
+✓ Intent classification and routing
+✓ Modular skill system
+✓ Web dashboard (FastAPI + HTML/JS)
+✓ Resource management and limits
+✓ Security sandboxing
+✓ Configuration system
+
+ACCEPTANCE CRITERIA:
+===================
+
+✓ Wake word detected from test audio
+✓ CodeSkill creates workspace/test.py with content
+✓ TTS synthesizes and saves to artifacts/tts-output.wav
+✓ Router uses LLMAdapter for fallback
+✓ envy-ready.zip exists with all required files
+✓ Test logs in artifacts/tests/
+
+CONFIGURATION:
+==============
+
+Default Profile: balanced
+- CPU Limit: 50%
+- Memory Limit: 4096 MB
+- GPU Support: Enabled (if available)
+
+Security:
+- System commands: Disabled by default
+- Confirmation required: Enabled
+- Sandbox execution: Enabled
+
+INSTALLATION:
+=============
+
+Linux:
+  ./install_envy.sh
+  ./run_envy_local.sh
+
+Windows:
+  install_envy.bat
+  run_envy_local.bat
+
+TESTING:
+========
+
+Run tests:
+  cd envy
+  ./scripts/run_tests.sh
+
+Performance report:
+  ./scripts/perf-report-gen.sh
+
+NOTES:
+======
+
+- VOSK model will be downloaded automatically during installation
+- Local LLM models are optional (download separately if needed)
+- Remote LLM fallback is opt-in (disabled by default)
+- All core functionality works without paid APIs
+- GPU acceleration is optional but recommended for better performance
+
+LICENSE:
+========
+
+MIT License - See LICENSE file
+
+==========================================
