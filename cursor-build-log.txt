@@ -1,0 +1,12 @@
+2025-11-11T09:43:57Z [TEST] ./scripts/run_tests.sh → PASS (logs: envy/artifacts/tests/pytest-2025-11-11T09-43-57+00-00.log)
+2025-11-11T09:45:15Z [INSTALL] ./install_envy.sh --local-demo → PASS (log: envy/artifacts/install-log.txt)
+2025-11-11T09:55:43Z [PERF] ./artifacts/perf-report-gen.sh → PASS (report: envy/artifacts/perf-report.txt)
+2025-11-11T09:55:50Z [PACKAGE] ./scripts/package_envy.sh → PASS (artifact: envy-ready.zip)
+
+Acceptance summary:
+- Wake-word detection confirmed (see perf report stdout block, wake detected).
+- CodeSkill created workspace/test.py with `print("hello from envy")`.
+- TTS rendered output to envy/artifacts/tts-output.wav.
+- Router fallback invoked (tests/test_pipeline.py::test_llm_fallback_response).
+- envy-ready.zip contains run_envy_local.sh, install scripts, config/envy.yaml, skills/.
+- Test logs stored under envy/artifacts/tests/ with zero failures.

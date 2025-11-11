@@ -1,0 +1,69 @@
+["build-system"]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "envy-assistant"
+version = "0.1.0"
+description = "Envy — local-first personal assistant with voice, skills, and web control."
+readme = "README.md"
+license = { text = "MIT License" }
+authors = [
+  { name = "Cursor Envy Team" }
+]
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.110,<1.0",
+  "uvicorn[standard]>=0.24,<1.0",
+  "vosk>=0.3.45",
+  "sounddevice>=0.4.6",
+  "numpy>=1.24",
+  "PyYAML>=6.0",
+  "pydantic>=2.5",
+  "pyttsx3>=2.90",
+  "psutil>=5.9",
+  "aiofiles>=23.2",
+  "jinja2>=3.1",
+  "sse-starlette>=1.6",
+  "typer>=0.9",
+  "rich>=13.6",
+  "httpx>=0.26",
+  "watchfiles>=0.21",
+  "python-multipart>=0.0.9",
+  "sqlmodel>=0.0.16",
+  "sseclient-py>=1.8"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4",
+  "pytest-asyncio>=0.21",
+  "pytest-timeout>=2.2",
+  "coverage>=7.3",
+  "ruff>=0.6.4",
+  "mypy>=1.8"
+]
+llm = [
+  "llama-cpp-python>=0.2.83",
+  "sentencepiece>=0.1.99"
+]
+
+[project.scripts]
+envy = "envy.cli:app"
+
+[tool.setuptools.package-dir]
+envy = "envy"
+
+[tool.setuptools.package-data]
+envy = ["py.typed", "templates/*.html", "static/*", "config/defaults/*.yaml"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "strict"
+filterwarnings = [
+  "ignore::DeprecationWarning"
+]

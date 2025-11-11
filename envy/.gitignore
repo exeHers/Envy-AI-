@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+artifacts/*
+!artifacts/perf-report-gen.sh
+artifacts/perf-report.txt
+artifacts/tests/
+!artifacts/tests/.gitkeep
+artifacts/logs/
+logs/
+models/
+workspace/
+cursor-build-log.txt
+envy-ready.zip

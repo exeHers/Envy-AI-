@@ -1,0 +1,115 @@
+# Default configuration for Envy assistant.
+#
+# Profiles control resource usage. Values are conservative for Intel i3 + GTX 1070.
+
+version: 1
+
+profiles:
+  low:
+    wake:
+      sensitivity: 0.55
+      frame_ms: 30
+    stt:
+      engine: vosk
+      sample_rate: 16000
+      model: models/vosk/vosk-model-small-en-us-0.15
+    llm:
+      provider: simple
+      max_tokens: 256
+    tts:
+      engine: pyttsx3
+      voice: default
+      rate: 160
+    parallel_skills: 1
+    gpu:
+      enabled: false
+  balanced:
+    wake:
+      sensitivity: 0.45
+      frame_ms: 20
+    stt:
+      engine: vosk
+      sample_rate: 16000
+      model: models/vosk/vosk-model-small-en-us-0.15
+    llm:
+      provider: simple
+      reasoning_model: null
+      max_tokens: 512
+    tts:
+      engine: pyttsx3
+      voice: default
+      rate: 170
+    parallel_skills: 2
+    gpu:
+      enabled: true
+      max_vram_mb: 4096
+  power:
+    wake:
+      sensitivity: 0.4
+      frame_ms: 15
+    stt:
+      engine: faster-whisper
+      sample_rate: 16000
+      model: models/whisper/ggml-small-q5
+    llm:
+      provider: llama-cpp
+      model_path: models/llm/llama-3-8b-instruct-q4.gguf
+      max_tokens: 1024
+    tts:
+      engine: coqui
+      voice: en-US-blizzard_lessac
+      rate: 180
+    parallel_skills: 3
+    gpu:
+      enabled: true
+      max_vram_mb: 6144
+
+audio:
+  input_device: default
+  output_device: default
+  chunk_samples: 2048
+
+logging:
+  level: INFO
+  file: logs/envy.log
+
+skills:
+  enabled:
+    - code
+    - research
+    - syscontrol
+    - reminder
+  destructive_requires_confirmation: true
+  whitelist_commands:
+    - ls
+    - cat
+    - echo
+    - python3
+
+web:
+  host: 0.0.0.0
+  port: 8765
+  dashboard_refresh_ms: 1000
+  enable_remote_access: false
+
+security:
+  require_dashboard_confirmation: true
+  confirmation_timeout_s: 30
+  sandbox_workdir: workspace
+
+artifacts:
+  root: artifacts
+  tts_output: artifacts/tts-output.wav
+  logs_dir: artifacts/tests
+
+persona:
+  voice: neutral
+  tone: concise
+  attitude: sardonic
+
+optional_remote:
+  llm_endpoint: null
+  enabled: false
+  note: >
+    Remote LLM endpoints are disabled by default. Set enabled=true and provide llm_endpoint
+    to opt into a free remote model (e.g. LM Studio, OpenRouter free tier).

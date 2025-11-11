@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Envy Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Envy Control Panel</h1>
+      <p class="subtitle">Neutral, concise, slightly sardonic — always listening.</p>
+    </header>
+
+    <section id="status">
+      <h2>Session Status</h2>
+      <div class="status-grid">
+        <div>
+          <span class="label">Last Transcript</span>
+          <pre id="transcript">{{ state.last_transcript }}</pre>
+        </div>
+        <div>
+          <span class="label">Last Response</span>
+          <pre id="response">{{ state.last_response }}</pre>
+        </div>
+        <div>
+          <span class="label">Pending Confirmation</span>
+          <pre id="confirmation">{{ state.pending_confirmation or "None" }}</pre>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="approve-btn" disabled>Approve</button>
+        <button id="reject-btn" disabled>Reject</button>
+      </div>
+    </section>
+
+    <section id="events">
+      <h2>Event Log</h2>
+      <ul id="event-log">
+        {% for event in state.events %}
+        <li>
+          <span class="timestamp">{{ '%.2f' | format(event.timestamp) }}</span>
+          <span class="level {{ event.level }}">{{ event.level.upper() }}</span>
+          <span class="message">{{ event.message }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <script>
+      async function refresh() {
+        const res = await fetch('/api/status');
+        if (!res.ok) return;
+        const state = await res.json();
+        document.getElementById('transcript').textContent = state.last_transcript || '';
+        document.getElementById('response').textContent = state.last_response || '';
+        document.getElementById('confirmation').textContent = state.pending_confirmation || 'None';
+
+        const approveBtn = document.getElementById('approve-btn');
+        const rejectBtn = document.getElementById('reject-btn');
+        const pending = !!state.pending_confirmation;
+        approveBtn.disabled = !pending;
+        rejectBtn.disabled = !pending;
+
+        const log = document.getElementById('event-log');
+        log.innerHTML = '';
+        state.events.slice(-50).reverse().forEach(ev => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span class="timestamp">${ev.timestamp.toFixed(2)}</span>
+            <span class="level ${ev.level}">${ev.level.toUpperCase()}</span>
+            <span class="message">${ev.message}</span>
+          `;
+          log.appendChild(li);
+        });
+      }
+
+      async function sendConfirmation(approve) {
+        await fetch('/api/confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ approve })
+        });
+        refresh();
+      }
+
+      document.getElementById('approve-btn').addEventListener('click', () => sendConfirmation(true));
+      document.getElementById('reject-btn').addEventListener('click', () => sendConfirmation(false));
+
+      setInterval(refresh, 2000);
+    </script>
+  </body>
+</html>
