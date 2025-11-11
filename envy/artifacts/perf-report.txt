@@ -1,0 +1,37 @@
+==========================================
+Envy Performance Report
+Generated: Tue Nov 11 09:21:54 AM UTC 2025
+==========================================
+
+CPU Information:
+CPU(s):                                  4
+On-line CPU(s) list:                     0-3
+Model name:                              Intel(R) Xeon(R) Processor
+Thread(s) per core:                      1
+Core(s) per socket:                      4
+NUMA node0 CPU(s):                       0-3
+
+Memory Information:
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       720Mi       9.0Gi       1.1Mi       6.3Gi        14Gi
+Swap:             0B          0B          0B
+
+GPU Information:
+NVIDIA GPU not detected or nvidia-smi not available
+
+Python Version:
+Python 3.12.3
+
+Key Package Versions:
+torch: not installed
+whisper: not installed
+vosk: not installed
+llama-cpp-python: not installed
+
+Resource Recommendations:
+- For Intel i3 + GTX 1070 (8GB VRAM):
+  * Use 'balanced' profile
+  * Whisper model: base
+  * LLM: quantized q4_0 model (7B parameters)
+  * GPU layers: 20-25
+
