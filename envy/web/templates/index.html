@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envy Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #10b981;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .command-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .button:hover {
+            background: #5568d3;
+        }
+        
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .response {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            min-height: 60px;
+            white-space: pre-wrap;
+        }
+        
+        .logs {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            max-height: 300px;
+            overflow-y: auto;
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .stat {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .stat-label {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .file-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            padding: 8px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎤 Envy Personal Assistant</h1>
+            <span class="status" id="status">Online</span>
+            <span style="margin-left: 15px; color: #666;">Profile: <span id="profile">balanced</span></span>
+        </header>
+        
+        <div class="grid">
+            <div class="card">
+                <h2>Manual Command</h2>
+                <input type="text" class="command-input" id="commandInput" placeholder="Enter command..." />
+                <button class="button" onclick="sendCommand()">Execute</button>
+                <div class="response" id="response">Response will appear here...</div>
+            </div>
+            
+            <div class="card">
+                <h2>System Status</h2>
+                <div class="stat">
+                    <span class="stat-label">Wake Listener:</span>
+                    <span id="wakeStatus">Active</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">STT:</span>
+                    <span id="sttStatus">Ready</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">TTS:</span>
+                    <span id="ttsStatus">Ready</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">LLM:</span>
+                    <span id="llmStatus">Ready</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Recent Files</h2>
+                <button class="button" onclick="refreshFiles()" style="margin-bottom: 10px;">Refresh</button>
+                <div class="file-list" id="fileList">
+                    <div>Loading files...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>System Logs</h2>
+            <button class="button" onclick="refreshLogs()" style="margin-bottom: 10px;">Refresh</button>
+            <div class="logs" id="logs">Loading logs...</div>
+        </div>
+    </div>
+    
+    <script>
+        // Load status on page load
+        window.onload = function() {
+            refreshStatus();
+            refreshFiles();
+            refreshLogs();
+            
+            // Auto-refresh every 10 seconds
+            setInterval(refreshStatus, 10000);
+        };
+        
+        // Send command
+        async function sendCommand() {
+            const input = document.getElementById('commandInput');
+            const response = document.getElementById('response');
+            const command = input.value.trim();
+            
+            if (!command) return;
+            
+            response.innerHTML = '<div class="loading"></div> Processing...';
+            
+            try {
+                const res = await fetch('/api/command', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ command })
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                    response.textContent = data.response;
+                } else {
+                    response.textContent = 'Error: ' + data.error;
+                }
+            } catch (error) {
+                response.textContent = 'Error: ' + error.message;
+            }
+        }
+        
+        // Refresh status
+        async function refreshStatus() {
+            try {
+                const res = await fetch('/api/status');
+                const data = await res.json();
+                
+                document.getElementById('status').textContent = data.status === 'online' ? 'Online' : 'Offline';
+                document.getElementById('profile').textContent = data.profile || 'balanced';
+                
+                if (data.services) {
+                    document.getElementById('wakeStatus').textContent = data.services.wake_listener || 'Unknown';
+                    document.getElementById('sttStatus').textContent = data.services.stt || 'Unknown';
+                    document.getElementById('ttsStatus').textContent = data.services.tts || 'Unknown';
+                    document.getElementById('llmStatus').textContent = data.services.llm || 'Unknown';
+                }
+            } catch (error) {
+                console.error('Failed to refresh status:', error);
+            }
+        }
+        
+        // Refresh files
+        async function refreshFiles() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '<div>Loading...</div>';
+            
+            try {
+                const res = await fetch('/api/files');
+                const data = await res.json();
+                
+                if (data.files && data.files.length > 0) {
+                    fileList.innerHTML = data.files.map(file => `
+                        <div class="file-item">
+                            <span>${file.type === 'directory' ? '📁' : '📄'} ${file.name}</span>
+                            <span>${file.size > 0 ? (file.size / 1024).toFixed(1) + ' KB' : ''}</span>
+                        </div>
+                    `).join('');
+                } else {
+                    fileList.innerHTML = '<div>No files</div>';
+                }
+            } catch (error) {
+                fileList.innerHTML = '<div>Error loading files</div>';
+            }
+        }
+        
+        // Refresh logs
+        async function refreshLogs() {
+            const logs = document.getElementById('logs');
+            
+            try {
+                const res = await fetch('/api/logs?lines=50');
+                const data = await res.json();
+                
+                if (data.logs) {
+                    logs.textContent = data.logs.join('');
+                    logs.scrollTop = logs.scrollHeight;
+                } else {
+                    logs.textContent = 'No logs available';
+                }
+            } catch (error) {
+                logs.textContent = 'Error loading logs';
+            }
+        }
+        
+        // Enter key to submit command
+        document.getElementById('commandInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendCommand();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+# Envy Personal Assistant Configuration
+
+# System profile: low, balanced, power
+# - low: minimal CPU/GPU, slower response
+# - balanced: moderate resources (default for i3+GTX1070)
+# - power: max performance
+profile: balanced
+
+# Wake word settings
+wake_word:
+  enabled: true
+  keyword: "envy"
+  sensitivity: 0.5  # 0.0-1.0, higher = more sensitive
+  model_path: "models/vosk-model-small-en-us-0.15"
+
+# Speech-to-Text settings
+stt:
+  engine: "vosk"  # vosk, whisper
+  model_path: "models/vosk-model-en-us-0.22"
+  whisper_model: "base"  # tiny, base, small (if using whisper)
+  streaming: true
+  timeout: 10  # seconds of silence before stopping
+
+# Text-to-Speech settings
+tts:
+  engine: "pyttsx3"  # pyttsx3, coqui
+  rate: 150  # words per minute
+  volume: 0.9
+  voice_id: null  # null = default voice
+
+# LLM Adapter settings
+llm:
+  # Primary: local model
+  local_enabled: true
+  local_model_path: "models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
+  local_context_length: 2048
+  local_threads: 4
+  local_gpu_layers: 0  # 0 = CPU only, increase if GPU available
+  
+  # Fallback: free remote endpoint (opt-in, disabled by default)
+  remote_enabled: false
+  remote_endpoint: "https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct"
+  remote_api_key: ""  # HuggingFace token (optional, free tier)
+  
+  # Behavior
+  max_tokens: 256
+  temperature: 0.7
+  timeout: 30
+
+# Resource limits
+resources:
+  profiles:
+    low:
+      max_cpu_percent: 30
+      max_memory_mb: 2048
+      gpu_enabled: false
+    balanced:
+      max_cpu_percent: 60
+      max_memory_mb: 4096
+      gpu_enabled: true
+      max_gpu_memory_mb: 2048
+    power:
+      max_cpu_percent: 90
+      max_memory_mb: 8192
+      gpu_enabled: true
+      max_gpu_memory_mb: 6144
+
+# Skills settings
+skills:
+  enabled: true
+  timeout: 60  # seconds
+  
+  # CodeSkill settings
+  code_skill:
+    enabled: true
+    workspace_dir: "workspace"
+    allowed_extensions: [".py", ".js", ".html", ".css", ".txt", ".md", ".json"]
+    max_file_size_kb: 1024
+  
+  # ResearchSkill settings
+  research_skill:
+    enabled: true
+    output_dir: "workspace/research"
+    max_sources: 5
+    use_local_llm: true
+  
+  # SysControlSkill settings
+  sys_control_skill:
+    enabled: true
+    require_confirmation: true
+    allowed_commands:
+      - "date"
+      - "time"
+      - "uptime"
+      - "df -h"
+      - "free -h"
+    dangerous_commands:
+      - "rm"
+      - "del"
+      - "format"
+      - "shutdown"
+      - "reboot"
+  
+  # ReminderSkill settings
+  reminder_skill:
+    enabled: true
+    storage_file: "config/reminders.json"
+
+# Web Dashboard settings
+web:
+  enabled: true
+  host: "127.0.0.1"
+  port: 8080
+  debug: false
+  log_file: "logs/web.log"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  dir: "logs"
+  max_size_mb: 100
+  backup_count: 5
+
+# Security
+security:
+  require_voice_confirmation: true
+  require_dashboard_confirmation: true
+  sandbox_mode: true
+  whitelist_only: true
+
+# Persona
+persona:
+  name: "Envy"
+  style: "neutral"  # neutral, friendly, sardonic
+  concise: true
+  voice_greeting: "Envy online. How can I assist?"

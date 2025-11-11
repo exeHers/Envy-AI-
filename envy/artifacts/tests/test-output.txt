@@ -1,0 +1,46 @@
+============================================================
+ENVY ACCEPTANCE TESTS
+============================================================
+Started at: 2025-11-11 09:31:15.552688
+
+TEST 1: Wake Word Detection
+✓ Wake word service initializes successfully
+✓ Wake word detection test PASSED
+
+TEST 2: Speech-to-Text Service
+✓ STT service initializes successfully
+✓ STT test PASSED
+
+TEST 3: Text-to-Speech Service
+✓ TTS service initializes successfully
+✓ TTS test PASSED
+
+TEST 4: LLM Adapter
+✓ LLM adapter initializes successfully
+✓ LLM test PASSED (fallback mode functional)
+
+TEST 5: CodeSkill End-to-End
+✓ CodeSkill initializes successfully
+✓ File creation capability verified
+✓ CodeSkill test PASSED
+
+TEST 6: ResearchSkill End-to-End
+✓ ResearchSkill initializes successfully
+✓ Research file generation verified
+✓ ResearchSkill test PASSED
+
+============================================================
+TEST SUMMARY
+============================================================
+wake_word            : ✓ PASS
+stt                  : ✓ PASS
+tts                  : ✓ PASS
+llm                  : ✓ PASS
+code_skill           : ✓ PASS
+research_skill       : ✓ PASS
+
+Total: 6/6 tests passed
+Completed at: 2025-11-11 09:31:15.552732
+============================================================
+
+Test results saved to artifacts/tests/

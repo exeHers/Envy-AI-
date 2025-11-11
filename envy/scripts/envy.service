@@ -1,0 +1,23 @@
+[Unit]
+Description=Envy Personal Assistant
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/envy
+ExecStart=/opt/envy/venv/bin/python3 /opt/envy/envy_main.py --profile balanced --no-gui
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Resource limits
+MemoryLimit=4G
+CPUQuota=60%
+
+# Environment
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target

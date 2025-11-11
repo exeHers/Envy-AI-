@@ -1,0 +1,35 @@
+# Envy Personal Assistant Dependencies
+
+# Core
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pyyaml==6.0.1
+python-multipart==0.0.6
+
+# Audio
+sounddevice==0.4.6
+soundfile==0.12.1
+numpy==1.24.3
+scipy==1.11.4
+
+# Wake word & STT
+vosk==0.3.45
+# openai-whisper==20231117  # Optional, larger dependency
+
+# TTS
+pyttsx3==2.90
+# TTS==0.21.1  # Coqui TTS - optional, heavier
+
+# LLM
+llama-cpp-python==0.2.20
+requests==2.31.0
+
+# Utilities
+psutil==5.9.6
+python-dotenv==1.0.0
+aiofiles==23.2.1
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
