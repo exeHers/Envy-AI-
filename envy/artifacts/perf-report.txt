@@ -1,0 +1,39 @@
+Envy Performance Report
+Samples collected: 5
+CPU max percent: 0.20
+CPU avg percent: 0.04
+Memory peak percent: 4.30
+GPU data: nvidia-smi not available.
+Raw samples:
+[
+  {
+    "timestamp": 1762854213.0401168,
+    "cpu_percent": 0.0,
+    "memory_percent": 4.3,
+    "memory_used": 720924672
+  },
+  {
+    "timestamp": 1762854214.0404193,
+    "cpu_percent": 0.0,
+    "memory_percent": 4.3,
+    "memory_used": 720924672
+  },
+  {
+    "timestamp": 1762854215.0407116,
+    "cpu_percent": 0.0,
+    "memory_percent": 4.3,
+    "memory_used": 720924672
+  },
+  {
+    "timestamp": 1762854216.0410383,
+    "cpu_percent": 0.2,
+    "memory_percent": 4.3,
+    "memory_used": 720924672
+  },
+  {
+    "timestamp": 1762854217.041365,
+    "cpu_percent": 0.0,
+    "memory_percent": 4.3,
+    "memory_used": 720924672
+  }
+]

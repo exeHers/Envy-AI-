@@ -1,0 +1,39 @@
+Cursor Build Log — Envy Assistant
+===================================
+Timestamp (UTC): 2025-11-11T09:46:30Z
+
+Environment
+-----------
+- OS: Linux 6.1.147
+- Python: 3.12.3
+- Hardware profile: Intel i3 class CPU (container), no accessible GPU (nvidia-smi unavailable)
+
+Executed Steps
+--------------
+1. `python3 -m pip install -e .[dev]` — SUCCESS
+2. `python3 -m pytest` — SUCCESS  
+   - Tests executed: 4  
+   - Acceptance artefact: `artifacts/tests/acceptance.log`
+3. `python3 scripts/perf_report.py` — SUCCESS  
+   - Output: `artifacts/perf-report.txt`
+4. `./install_envy.sh --local-demo` — SUCCESS  
+   - Fallback: auto-installed `virtualenv` (python3-venv missing)  
+   - Vosk model downloaded with checksum verification  
+   - Log: `artifacts/install-log.txt`
+5. `./scripts/package-ready.sh` — SUCCESS  
+   - Output: `envy-ready.zip`
+
+Acceptance Criteria Summary
+---------------------------
+- Wake-word detected from test audio — PASS (logged in `acceptance.log`)
+- CodeSkill created `workspace/test.py` and cleans up in tests — PASS
+- TTS synthesised output (silent fallback WAV) — PASS (`artifacts/audio/`)
+- Router LLM fallback responded (rule-based message) — PASS
+- `envy-ready.zip` contains run/install scripts, config, skills, and Vosk model — PASS
+- Automated tests exited with code 0 and logs saved — PASS
+- Performance report generated — PASS
+
+Residual Notes
+--------------
+- GPU metrics disabled because `nvidia-smi` not available in container.
+- pyttsx3 defaults to silent fallback in headless CI; instructions to upgrade voices provided in docs.

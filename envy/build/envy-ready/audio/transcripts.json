@@ -1,0 +1,16 @@
+{
+  "wake_demo.wav": {
+    "text": "envy",
+    "wake_word": true
+  },
+  "command_create_test.wav": {
+    "text": "envy create test.py that prints hello",
+    "wake_word": true,
+    "command_text": "create test.py that prints hello"
+  },
+  "command_research.wav": {
+    "text": "envy research local greenhouse designs",
+    "wake_word": true,
+    "command_text": "research local greenhouse designs"
+  }
+}

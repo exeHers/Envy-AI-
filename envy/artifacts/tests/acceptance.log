@@ -1,0 +1,4 @@
+Wake detection -> triggered=True confidence=0.60 transcript='envy'
+STT transcript: envy create test.py that prints hello
+Router response (code skill): intent=CodeSkill tts_engine=silent
+Research skill result: ok

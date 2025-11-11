@@ -1,0 +1,181 @@
+Metadata-Version: 2.4
+Name: envy-assistant
+Version: 0.1.0
+Summary: Envy: local-first Jarvis-style personal assistant with wake word, STT/TTS, modular skills, and dashboard
+Author-email: Cursor Envy Builders <envy@example.com>
+License: MIT License
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastapi>=0.110.0
+Requires-Dist: uvicorn[standard]>=0.30.0
+Requires-Dist: pydantic>=1.10.12
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: numpy>=1.26.0
+Requires-Dist: sounddevice>=0.4.6
+Requires-Dist: vosk>=0.3.45
+Requires-Dist: pyttsx3>=2.90
+Requires-Dist: psutil>=5.9.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: jinja2>=3.1.3
+Requires-Dist: python-multipart>=0.0.9
+Requires-Dist: aiofiles>=23.2.1
+Requires-Dist: sse-starlette>=1.8.2
+Requires-Dist: httpx>=0.27.0
+Requires-Dist: typer>=0.9.0
+Requires-Dist: rich>=13.7.0
+Provides-Extra: llm
+Requires-Dist: llama-cpp-python>=0.2.90; extra == "llm"
+Requires-Dist: transformers>=4.37.0; extra == "llm"
+Requires-Dist: accelerate>=0.26.0; extra == "llm"
+Requires-Dist: sentencepiece>=0.1.99; extra == "llm"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.4; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23.5; extra == "dev"
+Requires-Dist: pytest-mock>=3.11.1; extra == "dev"
+Dynamic: license-file
+
+# Envy — Local-First Personal Assistant
+
+Envy is a Jarvis-style, always-on assistant that runs entirely on local hardware (Intel i3 + GTX 1070 or better). It delivers wake-word detection, streaming STT/TTS, modular skills, a web dashboard, and safety guardrails — all without paid APIs. Optional remote or larger local models are opt-in only.
+
+## Quickstart
+
+```bash
+cd envy
+./install_envy.sh --local-demo    # creates venv, installs deps, downloads Vosk
+./run_envy_local.sh --profile balanced
+```
+
+Envy listens for the wake word “Envy” and displays live status at `http://127.0.0.1:5030`.
+
+## Features
+
+- **Wake word** via Vosk (keyword spotting) with transcript fallback for demos.
+- **Streaming STT** using Vosk, upgradeable to Whisper/WhisperX.
+- **TTS** via pyttsx3 (offline) with WAV artifact logging.
+- **Router + LLM adapter** with rule-based fallback; optional TinyLlama GGUF download.
+- **Skill plugins** (`skills/` folder) shipped with CodeSkill, ResearchSkill, SysControlSkill, ReminderSkill.
+- **Web dashboard** (FastAPI + HTMX) for logs, confirmations, manual commands.
+- **Safety**: destructive actions require voice + dashboard confirmation and sandboxed execution.
+- **Installers**: Linux shell + systemd unit, Windows batch + service wrapper.
+- **Automation**: tests, perf report, packaging script produce artifacts under `artifacts/`.
+
+## Installing
+
+### Linux
+
+```bash
+./install_envy.sh --local-demo     # optional flags: --llm, --force-models, --register-systemd
+```
+
+Key steps:
+- Creates `.envy-venv` virtualenv and installs Python dependencies.
+- Downloads Vosk small English model (≈40 MB). TinyLlama (≈1.1 GB) is optional (`--llm`).
+- Updates `config/envy.yaml` active profile.
+- Logs installation progress to `artifacts/install-log.txt`.
+- Optional systemd registration (`./installers/systemd/envy.service`).
+
+### Windows
+
+```powershell
+.\install_envy.bat        # optional: --profile power --llm
+```
+
+Registers dependencies in a local venv and downloads models. Use `installers/windows/install_service.ps1` to configure a Windows service (requires admin terminal):
+
+```powershell
+pwsh installers/windows/install_service.ps1 -ServiceName EnvyAssistant -Profile balanced
+```
+
+Detailed OS-specific notes live in `docs/install-linux.md` and `docs/install-windows.md`.
+
+## Running Envy
+
+```bash
+./run_envy_local.sh --profile balanced          # default profile
+./run_envy_local.sh --profile low --no-gui      # headless mode
+```
+
+This wraps the service launcher (`envy.core.service_launcher`) which spawns:
+
+| Service         | Port | Responsibilities |
+|-----------------|------|------------------|
+| wake_listener   | 5010 | Always-on keyword spotter |
+| stt             | 5011 | Streaming transcription |
+| skill_manager   | 5021 | Discovers & executes skills |
+| tts             | 5022 | Text-to-speech synthesis |
+| router          | 5020 | Session orchestration & LLM |
+| web_dashboard   | 5030 | Frontend dashboard |
+
+Dashboard: http://127.0.0.1:5030  
+Artifacts: `artifacts/audio/`, `artifacts/logs/`, `artifacts/tests/`
+
+## Automated Tests
+
+```bash
+source .envy-venv/bin/activate
+pytest
+```
+
+Critical checks (`tests/test_acceptance.py`) verify:
+- Wake word detection from bundled audio (`assets/audio/wake_demo.wav`)
+- STT pipeline transcription and streaming partials
+- CodeSkill end-to-end (“create test.py…”) with file output
+- ResearchSkill end-to-end (summary file + TTS artifact)
+- Logs recorded in `artifacts/tests/acceptance.log`
+
+## Performance Report
+
+While Envy is running:
+
+```bash
+./scripts/perf-report-gen.sh
+```
+
+Outputs CPU/GPU/memory statistics to `artifacts/perf-report.txt` using `psutil` and `nvidia-smi` when available.
+
+## Packaging
+
+To produce the self-contained package `envy-ready.zip`:
+
+```bash
+./scripts/package-ready.sh   # generated later in this repo
+```
+
+Contents include runtime scripts, configs, lightweight models, and demo audio.
+
+## Configuration
+
+- `config/envy.yaml` controls profiles (`low`, `balanced`, `power`), model paths, resource caps, safety policies, and optional remote LLM endpoints (disabled by default).
+- Profiles tune CPU/GPU usage and model selections.
+- `artifacts/models/` houses downloaded model assets.
+
+## Skills
+
+Drop-in Python modules live under `skills/`. Each skill inherits `Skill` and returns `SkillResult` metadata. Shipped skills:
+
+- `CodeSkill` — obeys sandbox paths, creates or edits files.
+- `ResearchSkill` — offline summary generator writing to `artifacts/research/`.
+- `SysControlSkill` — requires dual confirmation before critical actions.
+- `ReminderSkill` — tracks reminders in `artifacts/reminders.yaml`.
+
+## Security Notes
+
+- Sandbox defaults to `workspace/` and `artifacts/`.
+- Whitelisted commands: `ls`, `pwd`, `cat`, `echo`.
+- Destructive actions require both voice and dashboard confirmation.
+- Remote endpoints are opt-in and clearly marked.
+
+## Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| Wake word not triggering | Verify `artifacts/models/vosk-model-small-en-us-0.15` exists or rerun `scripts/download_models.sh`. |
+| No audio output | Check `artifacts/audio/` for generated WAV files; ensure speakers aren’t muted. |
+| pyttsx3 missing driver | Install `espeak` (Linux) or `sapi5` voices (Windows), or rely on silent fallback. |
+| GPU not utilized | Set `profiles.power.allow_gpu = true` and install CUDA drivers; rerun `install_envy.sh --profile power`. |
+
+## License
+
+[MIT License](LICENSE) © 2025 Envy

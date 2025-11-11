@@ -1,0 +1,73 @@
+active_profile: balanced
+artifacts_path: artifacts
+audio_demo_path: assets/audio
+profiles:
+  low:
+    description: CPU-only, minimal models for standby nodes
+    max_cpu_percent: 50
+    allow_gpu: false
+    stt_model: vosk-small
+    llm_model: null
+    tts_voice: default
+  balanced:
+    description: Recommended defaults for Intel i3 + GTX 1070 (8GB)
+    max_cpu_percent: 65
+    allow_gpu: true
+    stt_model: vosk-small
+    llm_model: tinyllama-1.1b-q4
+    tts_voice: default
+  power:
+    description: Higher quality models for powerful rigs
+    max_cpu_percent: 85
+    allow_gpu: true
+    stt_model: whisper-small
+    llm_model: vicuna-7b-q4
+    tts_voice: expressive
+wake:
+  model_path: artifacts/models/vosk-model-small-en-us-0.15
+  sensitivity: 0.45
+  sample_rate: 16000
+  chunk_size: 2048
+services:
+  wake_listener:
+    host: 127.0.0.1
+    port: 5010
+  stt:
+    host: 127.0.0.1
+    port: 5011
+  router:
+    host: 127.0.0.1
+    port: 5020
+  skill_manager:
+    host: 127.0.0.1
+    port: 5021
+  tts:
+    host: 127.0.0.1
+    port: 5022
+  dashboard:
+    host: 127.0.0.1
+    port: 5030
+safety:
+  destructive_requires_voice: true
+  destructive_requires_dashboard: true
+  sandbox_paths:
+  - workspace
+  - artifacts
+  command_whitelist:
+  - ls
+  - pwd
+  - cat
+  - echo
+  confirmation_timeout: 30
+skill_paths:
+- skills
+llm:
+  local:
+    enabled: false
+    model_path: artifacts/models/tinyllama-1.1b-chat.gguf
+    context_size: 2048
+    gpu_layers: 20
+  remote:
+    enabled: false
+    endpoint: https://api-inference.huggingface.co/models/openaccess-ai-collective/wizardlm-1.8b
+    auth_token: null

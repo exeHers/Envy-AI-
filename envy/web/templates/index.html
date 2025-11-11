@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Envy Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Envy Control Center</h1>
+      <p class="subtitle">Monitor sessions, confirm actions, and tweak settings.</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Pending Confirmations</h2>
+        <div id="confirmations"></div>
+      </section>
+
+      <section>
+        <h2>Active Sessions</h2>
+        <div id="sessions"></div>
+      </section>
+
+      <section>
+        <h2>Manual Command</h2>
+        <form id="command-form">
+          <label>
+            Text command:
+            <input type="text" id="command-text" placeholder="Envy, remind me to stretch in 10 minutes" />
+          </label>
+          <button type="submit">Send</button>
+        </form>
+        <pre id="command-result"></pre>
+      </section>
+    </main>
+
+    <footer>
+      <small>Envy &mdash; local-first assistant. Persona: concise, slightly sardonic.</small>
+    </footer>
+
+    <script>
+      async function fetchJSON(url, options = {}) {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+        return response.json();
+      }
+
+      async function refreshSessions() {
+        try {
+          const data = await fetchJSON("/api/sessions");
+          document.getElementById("sessions").innerHTML = data
+            .map((session) => {
+              return `
+                <div class="card">
+                  <h3>Session ${session.session_id}</h3>
+                  <p><strong>Last intent:</strong> ${session.last_intent || "n/a"}</p>
+                  <p><strong>Wake confidence:</strong> ${session.wake_confidence ?? "n/a"}</p>
+                  <details>
+                    <summary>History (${session.history.length})</summary>
+                    <pre>${JSON.stringify(session.history, null, 2)}</pre>
+                  </details>
+                </div>
+              `;
+            })
+            .join("");
+        } catch (error) {
+          document.getElementById("sessions").innerHTML = `<p class="error">${error.message}</p>`;
+        }
+      }
+
+      async function refreshConfirmations() {
+        try {
+          const data = await fetchJSON("/api/pending-confirmations");
+          if (!data.length) {
+            document.getElementById("confirmations").innerHTML = "<p>No pending confirmations.</p>";
+            return;
+          }
+          document.getElementById("confirmations").innerHTML = data
+            .map((item) => {
+              const disabled = item.status !== "pending" ? "disabled" : "";
+              return `
+                <div class="card">
+                  <h3>${item.skill}</h3>
+                  <p>${item.text}</p>
+                  <p>Status: <strong>${item.status}</strong></p>
+                  <button ${disabled} onclick="submitConfirmation('${item.confirmation_id}', true)">Approve</button>
+                  <button ${disabled} onclick="submitConfirmation('${item.confirmation_id}', false)">Reject</button>
+                </div>
+              `;
+            })
+            .join("");
+        } catch (error) {
+          document.getElementById("confirmations").innerHTML = `<p class="error">${error.message}</p>`;
+        }
+      }
+
+      async function submitConfirmation(confirmationId, approved) {
+        try {
+          await fetchJSON("/api/confirm", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ confirmation_id: confirmationId, approved }),
+          });
+          await refreshConfirmations();
+        } catch (error) {
+          alert("Error: " + error.message);
+        }
+      }
+
+      document.getElementById("command-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const text = document.getElementById("command-text").value;
+        if (!text) return;
+        try {
+          const result = await fetchJSON("/api/command", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text }),
+          });
+          document.getElementById("command-result").textContent = JSON.stringify(result, null, 2);
+          document.getElementById("command-text").value = "";
+          await refreshSessions();
+        } catch (error) {
+          document.getElementById("command-result").textContent = error.message;
+        }
+      });
+
+      refreshSessions();
+      refreshConfirmations();
+      setInterval(refreshSessions, 5000);
+      setInterval(refreshConfirmations, 4000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+[Unit]
+Description=Envy Personal Assistant
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/envy
+Environment=ENVY_PROFILE=balanced
+ExecStart=/home/%i/envy/start-envy.sh --profile balanced
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
