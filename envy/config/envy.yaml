@@ -1,0 +1,119 @@
+profiles:
+  low:
+    wake:
+      model: "models/vosk-model-small-en-us"
+      sensitivity: 0.45
+    stt:
+      engine: "vosk"
+      model: "models/vosk-model-small-en-us"
+    tts:
+      engine: "pyttsx3"
+      voice: "default"
+      rate: 175
+    llm:
+      provider: "stub"
+      max_tokens: 256
+    skills:
+      enabled:
+        - "code"
+        - "research"
+        - "syscontrol"
+        - "reminder"
+    resources:
+      cpu_limit_percent: 65
+      gpu_memory_percent: 30
+      enable_gpu_acceleration: false
+
+  balanced:
+    wake:
+      model: "models/vosk-model-small-en-us"
+      sensitivity: 0.4
+    stt:
+      engine: "vosk"
+      model: "models/vosk-model-small-en-us"
+    tts:
+      engine: "pyttsx3"
+      voice: "default"
+      rate: 190
+    llm:
+      provider: "llama_cpp"
+      model_path: "models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
+      gpu_layers: 16
+      max_tokens: 384
+    skills:
+      enabled:
+        - "code"
+        - "research"
+        - "syscontrol"
+        - "reminder"
+    resources:
+      cpu_limit_percent: 75
+      gpu_memory_percent: 45
+      enable_gpu_acceleration: true
+
+  power:
+    wake:
+      model: "models/vosk-model-small-en-us"
+      sensitivity: 0.35
+    stt:
+      engine: "whisper_cpp"
+      model: "models/ggml-base.en.bin"
+    tts:
+      engine: "coqui"
+      voice: "en_US/multi-dataset"
+      rate: 200
+    llm:
+      provider: "llama_cpp"
+      model_path: "models/mistral-7b-instruct-v0.2.Q4_K_M.gguf"
+      gpu_layers: 28
+      max_tokens: 512
+    skills:
+      enabled:
+        - "code"
+        - "research"
+        - "syscontrol"
+        - "reminder"
+        - "custom"
+    resources:
+      cpu_limit_percent: 85
+      gpu_memory_percent: 65
+      enable_gpu_acceleration: true
+
+runtime:
+  log_level: "INFO"
+  persona: "neutral-sardonic"
+  dashboard:
+    host: "127.0.0.1"
+    port: 7010
+  router:
+    host: "127.0.0.1"
+    port: 7000
+  services:
+    wake_listener_port: 7001
+    stt_port: 7002
+    tts_port: 7003
+    skill_manager_port: 7004
+    llm_adapter_port: 7005
+  confirmation:
+    require_voice_confirm: true
+    require_dashboard_confirm: true
+  security:
+    command_whitelist:
+      - "ls"
+      - "pwd"
+      - "cat"
+    dangerous_patterns:
+      - "rm -rf"
+      - ":(){ :|:& };:"
+      - "shutdown"
+  data_paths:
+    artifacts_dir: "artifacts"
+    logs_dir: "logs"
+    cache_dir: "cache"
+
+remote_endpoints:
+  enabled: false
+  providers:
+    - name: "huggingface-free"
+      url: "https://api-inference.huggingface.co/models/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF"
+      auth_env: "HUGGINGFACEHUB_API_TOKEN"

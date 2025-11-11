@@ -1,0 +1,258 @@
+[2025-11-11T09:41:09+00:00] Starting Envy installation...
+Creating virtual environment at /workspace/envy/.venv
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.12-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+
+Failing command: /workspace/envy/.venv/bin/python3
+
+[2025-11-11T09:42:21+00:00] Starting Envy installation...
+./install_envy.sh: line 49: /workspace/envy/.venv/bin/activate: No such file or directory
+[2025-11-11T09:43:16+00:00] Starting Envy installation...
+Existing virtual environment missing activation script; recreating...
+Creating virtual environment at /workspace/envy/.venv
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.12-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+
+Failing command: /workspace/envy/.venv/bin/python3
+
+Standard venv failed; falling back to virtualenv bootstrap...
+Defaulting to user installation because normal site-packages is not writeable
+Collecting virtualenv
+  Downloading virtualenv-20.35.4-py3-none-any.whl.metadata (4.6 kB)
+Collecting distlib<1,>=0.3.7 (from virtualenv)
+  Downloading distlib-0.4.0-py2.py3-none-any.whl.metadata (5.2 kB)
+Collecting filelock<4,>=3.12.2 (from virtualenv)
+  Downloading filelock-3.20.0-py3-none-any.whl.metadata (2.1 kB)
+Collecting platformdirs<5,>=3.9.1 (from virtualenv)
+  Downloading platformdirs-4.5.0-py3-none-any.whl.metadata (12 kB)
+Downloading virtualenv-20.35.4-py3-none-any.whl (6.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.0/6.0 MB 73.1 MB/s eta 0:00:00
+
+Downloading distlib-0.4.0-py2.py3-none-any.whl (469 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 469.0/469.0 kB 70.2 MB/s eta 0:00:00
+
+Downloading filelock-3.20.0-py3-none-any.whl (16 kB)
+Downloading platformdirs-4.5.0-py3-none-any.whl (18 kB)
+Installing collected packages: distlib, platformdirs, filelock, virtualenv
+  WARNING: The script virtualenv is installed in '/home/ubuntu/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed distlib-0.4.0 filelock-3.20.0 platformdirs-4.5.0 virtualenv-20.35.4
+created virtual environment CPython3.12.3.final.0-64 in 150ms
+  creator CPython3Posix(dest=/workspace/envy/.venv, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, via=copy, app_data_dir=/home/ubuntu/.local/share/virtualenv)
+    added seed packages: pip==25.3
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+Requirement already satisfied: pip in ./.venv/lib/python3.12/site-packages (25.3)
+Collecting wheel
+  Downloading wheel-0.45.1-py3-none-any.whl.metadata (2.3 kB)
+Downloading wheel-0.45.1-py3-none-any.whl (72 kB)
+Installing collected packages: wheel
+Successfully installed wheel-0.45.1
+Processing /workspace/envy
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting fastapi>=0.110.0 (from envy-assistant==0.1.0)
+  Downloading fastapi-0.121.1-py3-none-any.whl.metadata (28 kB)
+Collecting uvicorn>=0.27.0 (from uvicorn[standard]>=0.27.0->envy-assistant==0.1.0)
+  Downloading uvicorn-0.38.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting sounddevice>=0.4.6 (from envy-assistant==0.1.0)
+  Downloading sounddevice-0.5.3-py3-none-any.whl.metadata (1.6 kB)
+Collecting vosk>=0.3.45 (from envy-assistant==0.1.0)
+  Downloading vosk-0.3.45-py3-none-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (1.8 kB)
+Collecting pyttsx3>=2.90 (from envy-assistant==0.1.0)
+  Downloading pyttsx3-2.99-py3-none-any.whl.metadata (6.2 kB)
+Collecting httpx>=0.27.0 (from envy-assistant==0.1.0)
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting pyyaml>=6.0.1 (from envy-assistant==0.1.0)
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting psutil>=5.9.8 (from envy-assistant==0.1.0)
+  Downloading psutil-7.1.3-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl.metadata (23 kB)
+Collecting aiofiles>=23.2.1 (from envy-assistant==0.1.0)
+  Downloading aiofiles-25.1.0-py3-none-any.whl.metadata (6.3 kB)
+Collecting jinja2>=3.1.3 (from envy-assistant==0.1.0)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting python-multipart>=0.0.9 (from envy-assistant==0.1.0)
+  Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+Collecting sse-starlette>=1.6.0 (from envy-assistant==0.1.0)
+  Downloading sse_starlette-3.0.3-py3-none-any.whl.metadata (12 kB)
+Collecting typer>=0.9.0 (from typer[all]>=0.9.0->envy-assistant==0.1.0)
+  Downloading typer-0.20.0-py3-none-any.whl.metadata (16 kB)
+Collecting pytest>=7.4.4 (from envy-assistant==0.1.0)
+  Downloading pytest-9.0.0-py3-none-any.whl.metadata (7.6 kB)
+Collecting pytest-asyncio>=0.23.5 (from envy-assistant==0.1.0)
+  Downloading pytest_asyncio-1.3.0-py3-none-any.whl.metadata (4.1 kB)
+Collecting pytest-cov>=4.1.0 (from envy-assistant==0.1.0)
+  Downloading pytest_cov-7.0.0-py3-none-any.whl.metadata (31 kB)
+Collecting starlette<0.50.0,>=0.40.0 (from fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading starlette-0.49.3-py3-none-any.whl.metadata (6.4 kB)
+Collecting pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 (from fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading pydantic-2.12.4-py3-none-any.whl.metadata (89 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting annotated-doc>=0.0.2 (from fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+Collecting annotated-types>=0.6.0 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.41.5 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading pydantic_core-2.41.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting anyio<5,>=3.6.2 (from starlette<0.50.0,>=0.40.0->fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading anyio-4.11.0-py3-none-any.whl.metadata (4.1 kB)
+Collecting idna>=2.8 (from anyio<5,>=3.6.2->starlette<0.50.0,>=0.40.0->fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting sniffio>=1.1 (from anyio<5,>=3.6.2->starlette<0.50.0,>=0.40.0->fastapi>=0.110.0->envy-assistant==0.1.0)
+  Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting certifi (from httpx>=0.27.0->envy-assistant==0.1.0)
+  Downloading certifi-2025.10.5-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx>=0.27.0->envy-assistant==0.1.0)
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.27.0->envy-assistant==0.1.0)
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting MarkupSafe>=2.0 (from jinja2>=3.1.3->envy-assistant==0.1.0)
+  Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Collecting iniconfig>=1.0.1 (from pytest>=7.4.4->envy-assistant==0.1.0)
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting packaging>=22 (from pytest>=7.4.4->envy-assistant==0.1.0)
+  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pluggy<2,>=1.5 (from pytest>=7.4.4->envy-assistant==0.1.0)
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting pygments>=2.7.2 (from pytest>=7.4.4->envy-assistant==0.1.0)
+  Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+Collecting coverage>=7.10.6 (from coverage[toml]>=7.10.6->pytest-cov>=4.1.0->envy-assistant==0.1.0)
+  Downloading coverage-7.11.3-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (9.1 kB)
+Collecting CFFI>=1.0 (from sounddevice>=0.4.6->envy-assistant==0.1.0)
+  Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+Collecting pycparser (from CFFI>=1.0->sounddevice>=0.4.6->envy-assistant==0.1.0)
+  Downloading pycparser-2.23-py3-none-any.whl.metadata (993 bytes)
+Collecting click>=8.0.0 (from typer>=0.9.0->typer[all]>=0.9.0->envy-assistant==0.1.0)
+  Downloading click-8.3.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting shellingham>=1.3.0 (from typer>=0.9.0->typer[all]>=0.9.0->envy-assistant==0.1.0)
+  Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+Collecting rich>=10.11.0 (from typer>=0.9.0->typer[all]>=0.9.0->envy-assistant==0.1.0)
+  Downloading rich-14.2.0-py3-none-any.whl.metadata (18 kB)
+Collecting markdown-it-py>=2.2.0 (from rich>=10.11.0->typer>=0.9.0->typer[all]>=0.9.0->envy-assistant==0.1.0)
+  Downloading markdown_it_py-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=10.11.0->typer>=0.9.0->typer[all]>=0.9.0->envy-assistant==0.1.0)
+  Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+WARNING: typer 0.20.0 does not provide the extra 'all'
+Collecting httptools>=0.6.3 (from uvicorn[standard]>=0.27.0->envy-assistant==0.1.0)
+  Downloading httptools-0.7.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+Collecting python-dotenv>=0.13 (from uvicorn[standard]>=0.27.0->envy-assistant==0.1.0)
+  Downloading python_dotenv-1.2.1-py3-none-any.whl.metadata (25 kB)
+Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.27.0->envy-assistant==0.1.0)
+  Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+Collecting watchfiles>=0.13 (from uvicorn[standard]>=0.27.0->envy-assistant==0.1.0)
+  Downloading watchfiles-1.1.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+Collecting websockets>=10.4 (from uvicorn[standard]>=0.27.0->envy-assistant==0.1.0)
+  Downloading websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+Collecting requests (from vosk>=0.3.45->envy-assistant==0.1.0)
+  Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting tqdm (from vosk>=0.3.45->envy-assistant==0.1.0)
+  Downloading tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Collecting srt (from vosk>=0.3.45->envy-assistant==0.1.0)
+  Downloading srt-3.5.3.tar.gz (28 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting charset_normalizer<4,>=2 (from requests->vosk>=0.3.45->envy-assistant==0.1.0)
+  Downloading charset_normalizer-3.4.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting urllib3<3,>=1.21.1 (from requests->vosk>=0.3.45->envy-assistant==0.1.0)
+  Downloading urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
+Downloading aiofiles-25.1.0-py3-none-any.whl (14 kB)
+Downloading fastapi-0.121.1-py3-none-any.whl (109 kB)
+Downloading pydantic-2.12.4-py3-none-any.whl (463 kB)
+Downloading pydantic_core-2.41.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 95.7 MB/s  0:00:00
+
+Downloading starlette-0.49.3-py3-none-any.whl (74 kB)
+Downloading anyio-4.11.0-py3-none-any.whl (109 kB)
+Downloading annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Downloading psutil-7.1.3-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (263 kB)
+Downloading pytest-9.0.0-py3-none-any.whl (373 kB)
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading packaging-25.0-py3-none-any.whl (66 kB)
+Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 107.3 MB/s  0:00:00
+
+Downloading pytest_asyncio-1.3.0-py3-none-any.whl (15 kB)
+Downloading pytest_cov-7.0.0-py3-none-any.whl (22 kB)
+Downloading coverage-7.11.3-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (251 kB)
+Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
+Downloading pyttsx3-2.99-py3-none-any.whl (32 kB)
+Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 78.3 MB/s  0:00:00
+
+Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+Downloading sounddevice-0.5.3-py3-none-any.whl (32 kB)
+Downloading cffi-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (219 kB)
+Downloading sse_starlette-3.0.3-py3-none-any.whl (11 kB)
+Downloading typer-0.20.0-py3-none-any.whl (47 kB)
+Downloading click-8.3.0-py3-none-any.whl (107 kB)
+Downloading rich-14.2.0-py3-none-any.whl (243 kB)
+Downloading markdown_it_py-4.0.0-py3-none-any.whl (87 kB)
+Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Downloading uvicorn-0.38.0-py3-none-any.whl (68 kB)
+Downloading httptools-0.7.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (517 kB)
+Downloading python_dotenv-1.2.1-py3-none-any.whl (21 kB)
+Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 196.9 MB/s  0:00:00
+
+Downloading vosk-0.3.45-py3-none-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (7.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 62.3 MB/s  0:00:00
+
+Downloading watchfiles-1.1.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+Downloading websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (182 kB)
+Downloading certifi-2025.10.5-py3-none-any.whl (163 kB)
+Downloading pycparser-2.23-py3-none-any.whl (118 kB)
+Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+Downloading charset_normalizer-3.4.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+Downloading urllib3-2.5.0-py3-none-any.whl (129 kB)
+Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+Building wheels for collected packages: envy-assistant, srt
+  Building wheel for envy-assistant (pyproject.toml): started
+  Building wheel for envy-assistant (pyproject.toml): finished with status 'done'
+  Created wheel for envy-assistant: filename=envy_assistant-0.1.0-py3-none-any.whl size=25329 sha256=3ff1753dfa660cdcdb526b926b95a44c0ec595f441e3bbbae8903cdb43f79857
+  Stored in directory: /tmp/pip-ephem-wheel-cache-8f7fqz1a/wheels/06/07/9c/fe20260b57339606662633ab775e3a384cb5567879d4668739
+  Building wheel for srt (pyproject.toml): started
+  Building wheel for srt (pyproject.toml): finished with status 'done'
+  Created wheel for srt: filename=srt-3.5.3-py3-none-any.whl size=22512 sha256=4f69278e187ec3a333437d4da89309fc8048fc64bd32b5978e92b91477f4dcbd
+  Stored in directory: /home/ubuntu/.cache/pip/wheels/7e/75/5b/e1d5c3756631e4bda806f6cc9640153b39484bb6f7b0b8def3
+Successfully built envy-assistant srt
+Installing collected packages: pyttsx3, websockets, uvloop, urllib3, typing-extensions, tqdm, srt, sniffio, shellingham, pyyaml, python-multipart, python-dotenv, pygments, pycparser, psutil, pluggy, packaging, mdurl, MarkupSafe, iniconfig, idna, httptools, h11, coverage, click, charset_normalizer, certifi, annotated-types, annotated-doc, aiofiles, uvicorn, typing-inspection, requests, pytest, pydantic-core, markdown-it-py, jinja2, httpcore, CFFI, anyio, watchfiles, vosk, starlette, sse-starlette, sounddevice, rich, pytest-cov, pytest-asyncio, pydantic, httpx, typer, fastapi, envy-assistant
+
+
+Successfully installed CFFI-2.0.0 MarkupSafe-3.0.3 aiofiles-25.1.0 annotated-doc-0.0.4 annotated-types-0.7.0 anyio-4.11.0 certifi-2025.10.5 charset_normalizer-3.4.4 click-8.3.0 coverage-7.11.3 envy-assistant-0.1.0 fastapi-0.121.1 h11-0.16.0 httpcore-1.0.9 httptools-0.7.1 httpx-0.28.1 idna-3.11 iniconfig-2.3.0 jinja2-3.1.6 markdown-it-py-4.0.0 mdurl-0.1.2 packaging-25.0 pluggy-1.6.0 psutil-7.1.3 pycparser-2.23 pydantic-2.12.4 pydantic-core-2.41.5 pygments-2.19.2 pytest-9.0.0 pytest-asyncio-1.3.0 pytest-cov-7.0.0 python-dotenv-1.2.1 python-multipart-0.0.20 pyttsx3-2.99 pyyaml-6.0.3 requests-2.32.5 rich-14.2.0 shellingham-1.5.4 sniffio-1.3.1 sounddevice-0.5.3 srt-3.5.3 sse-starlette-3.0.3 starlette-0.49.3 tqdm-4.67.1 typer-0.20.0 typing-extensions-4.15.0 typing-inspection-0.4.2 urllib3-2.5.0 uvicorn-0.38.0 uvloop-0.22.1 vosk-0.3.45 watchfiles-1.1.1 websockets-15.0.1
+Preparing local models (mode=minimal)
+Created placeholder Vosk model directory at /workspace/envy/models/vosk-model-small-en-us
+[2025-11-11T09:43:28+00:00] Installation complete.

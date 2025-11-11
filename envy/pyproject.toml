@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "envy-assistant"
+version = "0.1.0"
+description = "Envy: local-first personal assistant microservice stack"
+authors = [{name = "Cursor Generated"}]
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.110.0",
+  "uvicorn[standard]>=0.27.0",
+  "sounddevice>=0.4.6",
+  "vosk>=0.3.45",
+  "pyttsx3>=2.90",
+  "httpx>=0.27.0",
+  "pyyaml>=6.0.1",
+  "psutil>=5.9.8",
+  "aiofiles>=23.2.1",
+  "jinja2>=3.1.3",
+  "python-multipart>=0.0.9",
+  "sse-starlette>=1.6.0",
+  "typer[all]>=0.9.0"
+]
+
+[project.optional-dependencies]
+llm = ["llama-cpp-python>=0.2.24"]
+tests = ["pytest>=7.4.4", "pytest-asyncio>=0.23.5", "pytest-cov>=4.1.0"]
+
+[project.scripts]
+envy = "envy.runtime.launcher:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["envy*"]

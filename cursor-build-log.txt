@@ -1,0 +1,12 @@
+[2025-11-11T09:43:16Z] install_envy.sh --local-demo ................ PASS
+[2025-11-11T09:45:45Z] pytest (tests/test_acceptance.py) ............ PASS
+[2025-11-11T09:47:06Z] artifacts/perf-report-gen.sh (duration=5s) ... PASS
+[2025-11-11T09:47:32Z] scripts/package_ready.sh ..................... PASS
+
+Acceptance criteria summary:
+- Wake word detected from test audio ................................. PASS
+- CodeSkill created /workspace/test.py with expected content ........ PASS
+- TTS synthesized output saved to artifacts/tts-output.wav .......... PASS
+- LLM adapter returned fallback response (provider=stub) ............ PASS
+- artifacts/tests/ contains acceptance logs ......................... PASS
+- envy-ready.zip present at workspace root .......................... PASS

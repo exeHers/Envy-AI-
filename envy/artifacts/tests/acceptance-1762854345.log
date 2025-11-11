@@ -1,0 +1,21 @@
+[2025-11-11T09:45:45Z] Launched Envy process for tests.
+[2025-11-11T09:45:45Z] Router health endpoint reachable.
+[2025-11-11T09:45:45Z] Wake listener response: {'wake_detected': True, 'keyword': 'envy'}
+[2025-11-11T09:45:45Z] Router pipeline response: {
+  "transcript": "create test.py that prints hello from envy",
+  "intent": "code",
+  "skill_result": {
+    "success": true,
+    "speech": "I created test.py with your requested content.",
+    "data": {
+      "path": "/workspace/test.py",
+      "content": "print(\"hello from envy\")"
+    },
+    "requires_confirmation": false
+  },
+  "tts_file": "/workspace/envy/artifacts/tts-output.wav",
+  "pending_action_id": null
+}
+[2025-11-11T09:45:45Z] TTS output located at /workspace/envy/artifacts/tts-output.wav
+[2025-11-11T09:45:45Z] LLM adapter response: {'text': 'Envy here. I processed your request locally using the lightweight fallback model. Prompt summary: Who are you?...', 'provider': 'stub'}
+[2025-11-11T09:45:45Z] Envy process terminated after tests.

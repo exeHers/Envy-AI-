@@ -1,0 +1,5 @@
+[2025-11-11T09:44:52Z] Launched Envy process for tests.
+[2025-11-11T09:44:52Z] Router health endpoint reachable.
+[2025-11-11T09:44:52Z] Wake listener response: {'wake_detected': True, 'keyword': 'envy'}
+[2025-11-11T09:45:02Z] LLM adapter response: {'text': 'Envy here. I processed your request locally using the lightweight fallback model. Prompt summary: Who are you?...', 'provider': 'stub'}
+[2025-11-11T09:45:02Z] Envy process terminated after tests.

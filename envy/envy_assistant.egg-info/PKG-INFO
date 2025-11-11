@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: envy-assistant
+Version: 0.1.0
+Summary: Envy: local-first personal assistant microservice stack
+Author: Cursor Generated
+License: MIT
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: fastapi>=0.110.0
+Requires-Dist: uvicorn[standard]>=0.27.0
+Requires-Dist: sounddevice>=0.4.6
+Requires-Dist: vosk>=0.3.45
+Requires-Dist: pyttsx3>=2.90
+Requires-Dist: httpx>=0.27.0
+Requires-Dist: pyyaml>=6.0.1
+Requires-Dist: psutil>=5.9.8
+Requires-Dist: aiofiles>=23.2.1
+Requires-Dist: jinja2>=3.1.3
+Requires-Dist: python-multipart>=0.0.9
+Requires-Dist: sse-starlette>=1.6.0
+Requires-Dist: typer[all]>=0.9.0
+Provides-Extra: llm
+Requires-Dist: llama-cpp-python>=0.2.24; extra == "llm"
+Provides-Extra: tests
+Requires-Dist: pytest>=7.4.4; extra == "tests"
+Requires-Dist: pytest-asyncio>=0.23.5; extra == "tests"
+Requires-Dist: pytest-cov>=4.1.0; extra == "tests"
+Dynamic: license-file

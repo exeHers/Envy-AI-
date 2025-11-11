@@ -1,0 +1,38 @@
+{
+  "generated_at": "2025-11-11T09:47:06.219177Z",
+  "duration_seconds": 5,
+  "cpu_peak_percent": 0.2,
+  "cpu_avg_percent": 0.08,
+  "memory_peak_percent": 5.5,
+  "memory_avg_percent": 5.5,
+  "gpu": {
+    "status": "nvidia-smi unavailable"
+  },
+  "samples": [
+    {
+      "timestamp": 1762854422.216149,
+      "cpu_percent": 0.2,
+      "mem_percent": 5.5
+    },
+    {
+      "timestamp": 1762854423.216444,
+      "cpu_percent": 0.0,
+      "mem_percent": 5.5
+    },
+    {
+      "timestamp": 1762854424.2167203,
+      "cpu_percent": 0.0,
+      "mem_percent": 5.5
+    },
+    {
+      "timestamp": 1762854425.2170196,
+      "cpu_percent": 0.2,
+      "mem_percent": 5.5
+    },
+    {
+      "timestamp": 1762854426.2173507,
+      "cpu_percent": 0.0,
+      "mem_percent": 5.5
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+[Unit]
+Description=Envy Personal Assistant
+After=network.target sound.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/envy
+ExecStart=/opt/envy/start-envy.sh --profile balanced
+Restart=on-failure
+RestartSec=5
+User=envy
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

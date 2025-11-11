@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Envy Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Envy Control Panel</h1>
+    <p>Status: {{ router_health.get("status", "unknown") }}</p>
+  </header>
+
+  <section>
+    <h2>Pending Confirmations</h2>
+    {% if pending_actions %}
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Intent</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for action in pending_actions %}
+          <tr>
+            <td>{{ action.id }}</td>
+            <td>{{ action.intent }}</td>
+            <td>{{ action.status }}</td>
+            <td>
+              {% if action.status == "awaiting_dashboard" %}
+              <form action="/confirm/{{ action.id }}" method="post">
+                <button type="submit">Confirm</button>
+              </form>
+              {% else %}
+                <span>Waiting for voice</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No pending actions.</p>
+    {% endif %}
+  </section>
+
+  <section>
+    <h2>Recent Logs</h2>
+    <pre class="logs">{% for line in logs %}{{ line }}
+{% endfor %}</pre>
+  </section>
+</body>
+</html>
