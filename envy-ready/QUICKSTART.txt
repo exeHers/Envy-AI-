@@ -1,0 +1,22 @@
+ENVY PERSONAL ASSISTANT - QUICK START
+=====================================
+
+1. INSTALLATION:
+   Linux/Mac: bash scripts/install_envy.sh --local-demo
+   Windows:   scripts\install_envy.bat --local-demo
+
+2. RUN:
+   Linux/Mac: ./run_envy_local.sh
+   Windows:   run_envy_local.bat
+
+3. ACCESS DASHBOARD:
+   Open browser to: http://localhost:8080
+
+4. TEST:
+   Linux/Mac: ./scripts/run_tests.sh
+   Windows:   Use Git Bash or WSL for tests
+
+5. CONFIGURE:
+   Edit config/envy.yaml to customize settings
+
+For detailed instructions, see docs/install-linux.md or docs/install-windows.md

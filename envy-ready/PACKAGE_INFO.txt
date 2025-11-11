@@ -1,0 +1,17 @@
+Envy Personal Assistant Distribution
+Generated: Tue Nov 11 09:21:18 AM UTC 2025
+Version: 1.0.0
+
+Contents:
+- Source code (services/, skills/, web/)
+- Configuration (config/)
+- Installation scripts (scripts/)
+- Documentation (docs/)
+- Run scripts (run_envy_local.sh/bat)
+
+To install:
+1. Extract this package
+2. Run installer script
+3. Start with run_envy_local.sh/bat
+
+See README.md for full documentation.

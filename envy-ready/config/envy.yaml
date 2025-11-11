@@ -1,0 +1,109 @@
+# Envy Personal Assistant Configuration
+# Resource-safe defaults for Intel i3 + GTX 1070 (8GB VRAM) + 16GB RAM
+
+# General settings
+assistant:
+  name: "Envy"
+  wake_word: "envy"
+  persona: "neutral, concise, slightly sardonic"
+  language: "en-US"
+
+# Resource profiles: low, balanced, power
+profile: "balanced"
+
+# Wake word detection
+wake_word:
+  engine: "vosk"  # vosk, porcupine
+  sensitivity: 0.5
+  model_path: "models/vosk-wake"
+  cpu_limit: 0.1  # Max CPU usage (0.0-1.0)
+
+# Speech-to-Text (STT)
+stt:
+  engine: "whisper"  # whisper, vosk
+  model: "small"  # tiny, base, small, medium
+  quantized: true
+  device: "auto"  # auto, cpu, cuda
+  streaming: true
+  cpu_limit: 0.3
+  gpu_memory_limit_mb: 2048
+
+# Text-to-Speech (TTS)
+tts:
+  engine: "pyttsx3"  # pyttsx3, coqui
+  voice: "default"
+  rate: 150
+  volume: 0.8
+  streaming: true
+  cpu_limit: 0.2
+
+# LLM Adapter
+llm:
+  primary: "local"  # local, remote
+  fallback: "remote"
+  
+  local:
+    engine: "llama.cpp"  # llama.cpp, onnx
+    model_path: "models/llama-7b-q4_0.gguf"
+    context_size: 2048
+    threads: 4
+    gpu_layers: 20  # Use GPU layers if available
+    cpu_limit: 0.4
+    gpu_memory_limit_mb: 4096
+  
+  remote:
+    enabled: false  # Opt-in only
+    endpoint: "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium"
+    api_key: ""  # Leave empty for free tier
+    timeout: 10
+
+# Skills
+skills:
+  enabled:
+    - CodeSkill
+    - ResearchSkill
+    - SysControlSkill
+    - ReminderSkill
+  
+  timeout: 30  # seconds
+  require_confirmation:
+    - SysControlSkill.destructive
+    - CodeSkill.file_write
+    - SysControlSkill.system_command
+
+# Security
+security:
+  sandbox_enabled: true
+  allowed_commands: []  # Whitelist for system commands
+  require_voice_confirmation: true
+  require_dashboard_confirmation: true
+  max_file_size_mb: 10
+
+# Web Dashboard
+web:
+  host: "127.0.0.1"
+  port: 8080
+  debug: false
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "artifacts/envy.log"
+  console: true
+
+# Performance limits (profile-based)
+limits:
+  low:
+    max_cpu_percent: 30
+    max_gpu_memory_mb: 2048
+    max_ram_mb: 2048
+  
+  balanced:
+    max_cpu_percent: 60
+    max_gpu_memory_mb: 4096
+    max_ram_mb: 4096
+  
+  power:
+    max_cpu_percent: 90
+    max_gpu_memory_mb: 6144
+    max_ram_mb: 8192

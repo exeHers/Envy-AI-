@@ -1,0 +1,10 @@
+Basic Import Tests
+==================
+
+PASS: Config loading
+PASS: CodeSkill import
+PASS: SkillManager import
+
+Total: 3 tests
+Passed: 3
+Failed: 0

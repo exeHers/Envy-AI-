@@ -1,0 +1,25 @@
+==========================================
+Envy Performance Report
+Generated: Tue Nov 11 09:21:12 AM UTC 2025
+==========================================
+
+CPU Information:
+  Model: Intel(R) Xeon(R) Processor
+  Cores: 4
+
+Memory Information:
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       695Mi       9.0Gi       1.1Mi       6.3Gi        14Gi
+
+GPU Information:
+  No NVIDIA GPU detected (or nvidia-smi not available)
+
+Python Version:
+Python 3.12.3
+
+Key Package Versions:
+
+==========================================
+Note: Runtime performance metrics would
+be captured during actual execution.
+==========================================
