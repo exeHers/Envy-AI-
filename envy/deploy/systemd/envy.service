@@ -1,0 +1,17 @@
+[Unit]
+Description=Envy Personal Assistant
+After=network.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory={{ENVY_HOME}}
+Environment="PATH={{ENVY_VENV}}/bin:/usr/bin:/bin"
+ExecStart={{ENVY_HOME}}/start-envy.sh --profile balanced
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:{{ENVY_HOME}}/logs/systemd-envy.log
+StandardError=append:{{ENVY_HOME}}/logs/systemd-envy.err
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,97 @@
+meta:
+  name: "Envy"
+  persona: "neutral, concise, slightly sardonic"
+
+profiles:
+  low:
+    wake_sample_rate: 16000
+    max_parallel_skills: 1
+    llm:
+      strategy: "rule"
+  balanced:
+    wake_sample_rate: 16000
+    max_parallel_skills: 2
+    llm:
+      strategy: "local"
+  power:
+    wake_sample_rate: 16000
+    max_parallel_skills: 3
+    llm:
+      strategy: "gpu"
+
+paths:
+  runtime_dir: "./runtime"
+  logs_dir: "./logs"
+  models_dir: "./models"
+  artifacts_dir: "./artifacts"
+
+wake:
+  engine: "vosk"
+  model: "${paths.models_dir}/vosk-model-small-en-us-0.15"
+  keyword: "envy"
+  sensitivity: 0.5
+  min_phrase_length_ms: 300
+
+stt:
+  engine: "vosk"
+  model: "${paths.models_dir}/vosk-model-small-en-us-0.15"
+  fallback_engine: "whisper"
+  whisper_model: "ggml-tiny.en.bin"
+  max_capture_seconds: 15
+
+tts:
+  engine: "pyttsx3"
+  voice: null
+  rate: 180
+  volume: 0.8
+  fallback_engine: "coqui"
+
+llm:
+  adapter: "llama_cpp"
+  strategies:
+    rule:
+      fallback_texts:
+        - "Sure, I'll take care of that."
+        - "Consider it done."
+        - "Working on it now."
+    local:
+      model_path: "${paths.models_dir}/tinyllama-1.1b-chat.Q4_K_M.gguf"
+      context_size: 2048
+      gpu_layers: 16
+    gpu:
+      model_path: "${paths.models_dir}/tinyllama-1.1b-chat.Q4_K_M.gguf"
+      context_size: 4096
+      gpu_layers: 32
+    remote:
+      enabled: false
+      endpoint: "https://huggingface.co/api/v1/free-endpoint"
+      api_key_env: "ENVY_REMOTE_API_KEY"
+
+skills:
+  enabled:
+    - "CodeSkill"
+    - "ResearchSkill"
+    - "SysControlSkill"
+    - "ReminderSkill"
+  sandbox:
+    allowed_commands:
+      - "ls"
+      - "pwd"
+      - "cat"
+    require_confirmation:
+      destructive: true
+      remote_calls: true
+  reminders:
+    storage_path: "${paths.runtime_dir}/reminders.json"
+  workspace_root: "./workspace"
+  research_root: "./workspace/research"
+
+security:
+  require_dashboard_confirmation: true
+  confirmation_timeout_sec: 120
+  log_sensitive_actions: true
+
+web:
+  host: "0.0.0.0"
+  port: 8080
+  dashboard_refresh_sec: 2

@@ -1,0 +1,7 @@
+2025-11-11T09:48:00Z | SETUP     | PASS | Scaffolded repo structure, configs, and base docs.
+2025-11-11T09:49:30Z | SERVICES  | PASS | Implemented wake/STT/router/skill/TTS/dashboard microservices with event bus.
+2025-11-11T09:50:10Z | SKILLS    | PASS | Added Code/Research/SysControl/Reminder skills with sandbox + confirmation workflow.
+2025-11-11T09:50:45Z | TESTS     | PASS | python3 -m pytest → acceptance voice flow created workspace/test.py & TTS artifact (logs in artifacts/tests/).
+2025-11-11T09:51:45Z | PERF      | PASS | artifacts/perf-report-gen.sh → generated CPU/GPU stats (artifacts/perf-report.txt/json).
+2025-11-11T09:52:34Z | INSTALL   | PASS | ./install_envy.sh --local-demo (virtualenv fallback) downloaded Vosk model & rendered systemd unit.
+2025-11-11T09:53:05Z | PACKAGE   | PASS | python3 scripts/package_envy.py --output envy-ready.zip (copied to workspace root).

@@ -1,0 +1,154 @@
+Metadata-Version: 2.4
+Name: envy-assistant
+Version: 0.1.0
+Summary: Envy — Local Jarvis-style personal assistant
+Author: Cursor Agent
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastapi>=0.111.0
+Requires-Dist: uvicorn[standard]>=0.30.0
+Requires-Dist: pyyaml>=6.0.1
+Requires-Dist: numpy>=1.26.4
+Requires-Dist: sounddevice>=0.4.6
+Requires-Dist: soundfile>=0.12.1
+Requires-Dist: vosk>=0.3.44
+Requires-Dist: pyttsx3>=2.90
+Requires-Dist: psutil>=5.9.8
+Requires-Dist: requests>=2.32.3
+Requires-Dist: aiohttp>=3.9.5
+Requires-Dist: jinja2>=3.1.3
+Requires-Dist: pydantic>=2.8.2
+Requires-Dist: python-multipart>=0.0.9
+Requires-Dist: websockets>=12.0
+Requires-Dist: anyio>=4.4.0
+Requires-Dist: sse-starlette>=1.6.5
+Requires-Dist: watchfiles>=0.21.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.2.2; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23.7; extra == "dev"
+Requires-Dist: pytest-timeout>=2.3.1; extra == "dev"
+Requires-Dist: mypy>=1.10.0; extra == "dev"
+Requires-Dist: black>=24.4.2; extra == "dev"
+Requires-Dist: ruff>=0.5.5; extra == "dev"
+Dynamic: license-file
+
+# Envy — Local Jarvis-Style Personal Assistant
+
+Envy is a full-stack, always-on personal assistant that runs on commodity hardware (Intel i3 + GTX 1070 + 16 GB RAM). It provides wake-word activation, streaming speech-to-text/text-to-speech, modular skills, a FastAPI dashboard, and secure confirmation workflows — all without requiring paid APIs.
+
+## Quickstart
+
+```bash
+git clone https://github.com/your-org/envy.git
+cd envy
+./install_envy.sh --local-demo          # installs deps, downloads wake-word model, primes demo audio
+./run_envy_local.sh --profile balanced  # start Envy headless, uses local wake/STT/TTS + skill router
+```
+
+Windows users: run `install_envy.bat` and `run_envy_local.bat --profile balanced`.
+
+After the assistant is running, open the dashboard at http://localhost:8080 to view logs, pending confirmations, and send manual commands.
+
+## Features
+
+- **Wake Word & Audio Pipeline**
+  - Vosk-powered wake-word detection (`“Envy”`) with streaming capture
+  - Configurable STT (Vosk by default, Whisper optional) with partial transcript streaming
+  - Pyttsx3 (or tone fallback) for TTS, with saved WAV artifacts
+- **Modular Microservices**
+  - Wake listener, STT service, router/intent engine, skill manager, TTS service, FastAPI dashboard
+  - Async event bus connects services; dashboard exposes REST + SSE feeds
+- **Skills System (`skills/`)**
+  - `CodeSkill`: create/update sandboxed files (ex. `test.py` → `print("hello from envy")`)
+  - `ResearchSkill`: write brief research summaries and metadata
+  - `SysControlSkill`: execute whitelisted commands, require dual confirmation for destructive actions
+  - `ReminderSkill`: persist reminders to JSON storage
+- **Security**
+  - Destructive intents require voice confirmation *and* dashboard approval before execution
+  - Configurable sandbox whitelist (`config/envy.yaml`) limits allowed system commands
+- **Operations & Packaging**
+  - `install_envy.sh` / `.bat` install dependencies, download Vosk model, prep audio fixtures
+  - `deploy/systemd/envy.service` template & `deploy/windows/install_envy_service.ps1` for services
+  - `scripts/package_envy.py` builds `envy-ready.zip` with code, scripts, docs, and helpers
+  - `artifacts/perf-report-gen.sh` produces CPU/GPU/memory latency report (uses psutil/nvidia-smi)
+- **Automated Acceptance Test**
+  - `pytest` test simulates wake + command audio, verifies wake detection, file creation, TTS output, and LLM fallback usage
+
+## Profiles & Configuration
+
+Main configuration lives in `config/envy.yaml`. Three profiles are provided:
+
+- `low` — CPU-friendly mode, rule-based LLM responses
+- `balanced` *(default)* — Vosk STT, local stub LLM, moderate concurrency
+- `power` — same as balanced but expecting GPU-accelerated LLM (optional)
+
+Switch profiles by passing `--profile <profile>` to any runner script. All runtime paths (logs, models, artifacts) are configurable via the same YAML.
+
+## Skills Overview
+
+| Skill              | Description                                               | Confirmation |
+|--------------------|-----------------------------------------------------------|--------------|
+| `CodeSkill`        | Creates code/text files inside the sandboxed workspace    | No           |
+| `ResearchSkill`    | Generates local research summary & metadata files         | No           |
+| `SysControlSkill`  | Executes whitelisted commands (`ls`, `pwd`, `cat`)        | Destructive actions require voice + dashboard confirmation |
+| `ReminderSkill`    | Stores reminders to `runtime/reminders.json`              | No           |
+
+Add new skills by dropping modules into `skills/` and enabling them in `config/envy.yaml`.
+
+## Running the Dashboard
+
+```bash
+./start-envy.sh --profile balanced
+```
+
+Navigate to http://localhost:8080:
+- Event stream with live updates
+- Pending confirmations queue with approve/reject buttons
+- Profile indicator and status refresh
+
+Use `--no-gui` to skip the dashboard when running on servers.
+
+## Tests, Logs, and Reports
+
+- `python3 -m pytest` runs the acceptance suite. Logs land in `artifacts/tests/`.
+- `artifacts/perf-report-gen.sh` → runs a sample session, captures CPU/GPU usage, and writes `artifacts/perf-report.txt` + JSON.
+- Runtime logs stream to `logs/envy.log`; TTS audio saved to `artifacts/tts-output.wav`.
+
+## Packaging for Distribution
+
+```bash
+python3 scripts/package_envy.py              # produces envy-ready.zip in repo root
+```
+
+The archive contains all code, scripts, configs, docs, installers, and download helpers needed to deploy Envy on another machine.
+
+## Service Installation
+
+- **Systemd (Linux):**
+  1. Run `install_envy.sh`
+  2. Copy `deploy/systemd/envy.generated.service` to `/etc/systemd/system/envy.service`
+  3. `sudo systemctl enable --now envy`
+
+- **Windows Service (PowerShell as admin):**
+  ```powershell
+  .\install_envy.bat
+  powershell -ExecutionPolicy Bypass -File .\deploy\windows\install_envy_service.ps1
+  Start-Service EnvyAssistant
+  ```
+
+## Optional Models & Remote LLMs
+
+`scripts/download_models.sh --tinyllama` (or PowerShell equivalent) fetches TinyLlama Q4 GGUF for local LLM inference. Remote LLM usage is disabled by default; enable by editing `llm.strategies.remote` in the config and providing a free API endpoint/key.
+
+## Troubleshooting
+
+- **Audio device unavailable:** set `ENVY_DISABLE_WAKE=1` to bypass microphone and feed audio via `--simulate-audio`.
+- **pyttsx3 errors:** the assistant falls back to tone synthesis and still writes `tts-output.wav`.
+- **Model downloads blocked:** use offline mirrors or pre-stage the models in `models/` before running install scripts.
+- **GPU metrics missing:** install NVIDIA drivers + `nvidia-smi` or rely on CPU-only metrics.
+
+## License
+
+MIT License © 2025 Envy contributors. All code is generated within Cursor and free for reuse. See `LICENSE` for details.

@@ -1,0 +1,15 @@
+venv/
+.venv/
+.mypy_cache/
+__pycache__/
+models/
+runtime/
+logs/
+workspace/
+artifacts/install-log.txt
+artifacts/perf-report.txt
+artifacts/perf-report.json
+artifacts/tests/
+artifacts/tts-output.wav
+envy-ready.zip
+cursor-build-log.txt
