@@ -1,0 +1,29 @@
+[Unit]
+Description=Envy AI Personal Assistant
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=%i
+Group=%i
+WorkingDirectory=/opt/envy
+ExecStart=/opt/envy/venv/bin/python3 /opt/envy/envy_main.py --config /opt/envy/config/envy.yaml
+Restart=on-failure
+RestartSec=10
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/opt/envy/data /opt/envy/artifacts /opt/envy/workspace
+
+# Resource limits
+MemoryMax=4G
+CPUQuota=60%
+
+# Environment
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target

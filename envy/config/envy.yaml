@@ -1,0 +1,145 @@
+# Envy Personal Assistant Configuration
+# Default profile: balanced (suitable for Intel i3 + GTX 1070)
+
+general:
+  name: "Envy"
+  version: "1.0.0"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  data_dir: "./data"
+  models_dir: "./models"
+
+# Resource profiles: low, balanced, power
+resource_profile: "balanced"
+
+profiles:
+  low:
+    max_cpu_percent: 30
+    max_memory_mb: 2048
+    use_gpu: false
+    stt_model: "vosk-small"
+    llm_model: "none"  # Use remote fallback only
+    tts_engine: "pyttsx3"
+  
+  balanced:
+    max_cpu_percent: 60
+    max_memory_mb: 4096
+    use_gpu: true
+    stt_model: "faster-whisper-small"
+    llm_model: "tinyllama-1.1b-q4"  # Quantized local model
+    tts_engine: "pyttsx3"
+  
+  power:
+    max_cpu_percent: 90
+    max_memory_mb: 8192
+    use_gpu: true
+    stt_model: "faster-whisper-medium"
+    llm_model: "mistral-7b-q4"
+    tts_engine: "coqui"
+
+wake_word:
+  enabled: true
+  keyword: "envy"
+  sensitivity: 0.5  # 0.0 to 1.0
+  sample_rate: 16000
+  chunk_size: 4096
+  timeout_seconds: 5
+
+stt:
+  enabled: true
+  engine: "faster-whisper"  # vosk, faster-whisper, whisper
+  model_name: "base"
+  language: "en"
+  streaming: true
+  vad_enabled: true  # Voice activity detection
+  sample_rate: 16000
+
+tts:
+  enabled: true
+  engine: "pyttsx3"  # pyttsx3, coqui
+  voice_id: 0  # System voice index
+  rate: 175
+  volume: 0.9
+  streaming: true
+  save_audio: true  # Save to artifacts/tts-output.wav
+
+llm:
+  # Primary: local model (free, private)
+  primary_backend: "local"  # local, remote, hybrid
+  
+  local:
+    enabled: true
+    engine: "llama-cpp"  # llama-cpp, onnx
+    model_path: "./models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
+    context_length: 2048
+    max_tokens: 256
+    temperature: 0.7
+    gpu_layers: 10  # Number of layers to offload to GPU
+  
+  # Optional remote fallback (free tier, opt-in only)
+  remote:
+    enabled: false  # DISABLED BY DEFAULT
+    provider: "huggingface"  # huggingface, groq
+    api_url: "https://api-inference.huggingface.co/models/TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+    api_key: ""  # Leave empty for free tier
+    timeout: 10
+
+router:
+  enabled: true
+  intent_threshold: 0.7
+  max_retries: 2
+  timeout_seconds: 30
+
+skills:
+  enabled: true
+  plugins_dir: "./skills"
+  max_execution_time: 60
+  require_confirmation: true  # For destructive actions
+  
+  # Individual skill toggles
+  code_skill:
+    enabled: true
+    workspace_dir: "./workspace"
+    allowed_extensions: [".py", ".js", ".txt", ".md"]
+  
+  research_skill:
+    enabled: true
+    output_dir: "./artifacts/research"
+    max_sources: 5
+  
+  sys_control_skill:
+    enabled: true
+    whitelist_mode: true  # Only allow whitelisted commands
+    allowed_commands:
+      - "echo"
+      - "date"
+      - "uptime"
+      - "whoami"
+  
+  reminder_skill:
+    enabled: true
+    storage_file: "./data/reminders.json"
+
+web_dashboard:
+  enabled: true
+  host: "127.0.0.1"
+  port: 8080
+  cors_origins: ["*"]
+  require_confirmation_ui: true
+
+security:
+  sandbox_execution: true
+  require_voice_confirmation: true
+  require_dashboard_confirmation: true
+  max_file_size_mb: 10
+  blocked_paths:
+    - "/etc"
+    - "/sys"
+    - "/proc"
+    - "C:\\Windows"
+    - "C:\\System32"
+
+monitoring:
+  enabled: true
+  log_file: "./artifacts/logs/envy.log"
+  metrics_file: "./artifacts/logs/metrics.json"
+  check_interval_seconds: 5
