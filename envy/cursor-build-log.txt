@@ -1,0 +1,12 @@
+2025-11-11T09:34Z install_envy.sh --local-demo                       PASS
+2025-11-11T09:38Z pytest                                               PASS
+2025-11-11T09:39Z artifacts/perf-report-gen.sh                         PASS
+2025-11-11T09:40Z scripts/package_envy.sh                              PASS
+
+Acceptance Summary:
+- Wake word detected from data/audio_samples/wake_envy.wav (see artifacts/logs/envy.log)
+- CodeSkill created test.py with print("hello from envy") (see workspace/test.py)
+- TTS synthesis saved to artifacts/tts-output.wav
+- LLMAdapter fallback provider=rule-based recorded in artifacts/logs/envy.log
+- artifacts/tests/ contains test_audio_pipeline_creates_code.json with status=passed
+- envy-ready.zip packaged with installers, configs, skills, and scripts

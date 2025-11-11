@@ -1,0 +1,111 @@
+assistant:
+  name: "Envy"
+  persona: "Neutral, concise, slightly sardonic."
+  wake_word: "envy"
+  locale: "en-US"
+
+profiles:
+  default: "balanced"
+  options:
+    low:
+      description: "CPU-only minimal resource usage."
+      wake_listener:
+        frame_samples: 2048
+        detect_threshold: 0.6
+      stt:
+        engine: "vosk"
+        model: "models/vosk-model-small-en-us-0.15"
+      tts:
+        engine: "pyttsx3"
+        voice: "default"
+      llm:
+        engine: "rule-based"
+        model_path: ""
+      max_concurrent_skills: 1
+    balanced:
+      description: "Balanced CPU/GPU use for i3 + GTX1070."
+      wake_listener:
+        frame_samples: 4096
+        detect_threshold: 0.5
+      stt:
+        engine: "vosk"
+        model: "models/vosk-model-small-en-us-0.15"
+      tts:
+        engine: "pyttsx3"
+        voice: "default"
+      llm:
+        engine: "llama-cpp"
+        model_path: "models/tinyllama-1.1b-chat-v1.0.Q4_0.gguf"
+      max_concurrent_skills: 2
+    power:
+      description: "Aggressive use of available GPU."
+      wake_listener:
+        frame_samples: 8192
+        detect_threshold: 0.45
+      stt:
+        engine: "vosk"
+        model: "models/vosk-model-small-en-us-0.15"
+      tts:
+        engine: "coqui"
+        voice: "coqui-tts-en"
+      llm:
+        engine: "llama-cpp"
+        model_path: "models/ggml-model-q4_0.gguf"
+      max_concurrent_skills: 4
+
+runtime:
+  profile: "balanced"
+  artifacts_dir: "artifacts"
+  logs_dir: "artifacts/logs"
+  enable_dashboard: true
+  dashboard_host: "0.0.0.0"
+  dashboard_port: 8420
+  allow_remote_dashboard: false
+
+security:
+  require_confirmation_for:
+    - "syscontrol.execute"
+    - "codeskill.write"
+  destructive_confirmation:
+    voice: true
+    dashboard: true
+  skill_whitelist:
+    - "codeskill"
+    - "researchskill"
+    - "syscontrol"
+    - "reminderskill"
+  command_whitelist:
+    - "ls"
+    - "pwd"
+    - "cat"
+
+models:
+  vosk:
+    url: "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"
+    checksum: ""
+  llama_cpp:
+    url: "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/TinyLlama-1.1B-Chat-v1.0.Q4_0.gguf"
+    checksum: ""
+
+skills:
+  reminder:
+    storage_path: "artifacts/reminders.json"
+  research:
+    output_dir: "artifacts/research"
+  code:
+    workspace_root: "."
+    allow_overwrite: false
+
+web:
+  session_timeout_seconds: 900
+  auth:
+    enabled: false
+    username: "admin"
+    password: "change-me"
+
+remote_endpoints:
+  enabled: false
+  endpoints:
+    - name: "together-ai"
+      url: "https://api.together.xyz/inference"
+      model: ""

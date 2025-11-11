@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+*.egg-info/
+*.log
+
+# Node / frontend
+node_modules/
+web/dashboard/node_modules/
+web/dashboard/build/
+
+# Artifacts
+artifacts/
+!artifacts/perf-report-gen.sh
+!artifacts/.gitkeep
+envy-ready.zip
+models/
+data/audio_samples/generated/
+
+# IDE
+.idea/
+.vscode/
+
+# System
+*.swp
+*.swo
+*.DS_Store
