@@ -1,0 +1,14 @@
+2025-11-11 09:50:17.289 | WARNING  | envy.services.wake_listener.wake_detector:__init__:33 - Vosk model path not found: models/vosk-model-small-en-us-0.15
+2025-11-11 09:50:17.298 | INFO     | envy.skills.code_skill:_handle_create_file:40 - Created file at /workspace/envy/test.py
+2025-11-11 09:50:17.337 | WARNING  | envy.services.tts_service.tts_engine:__init__:40 - pyttsx3 unavailable, falling back to tone synthesis: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:50:17.343 | INFO     | envy.services.tts_service.tts_engine:synthesize:52 - Synthesised speech saved to /workspace/envy/artifacts/tts/pytest.wav
+2025-11-11 09:51:32.391 | INFO     | envy.skills.code_skill:_handle_create_file:40 - Created file at /workspace/envy/test.py
+2025-11-11 09:51:52.945 | INFO     | envy.skills.code_skill:_handle_create_file:40 - Created file at /workspace/envy/workspace/test.py
+2025-11-11 09:51:59.335 | WARNING  | envy.services.wake_listener.wake_detector:__init__:33 - Vosk model path not found: models/vosk-model-small-en-us-0.15
+2025-11-11 09:51:59.343 | INFO     | envy.skills.code_skill:_handle_create_file:40 - Created file at /workspace/envy/workspace/test.py
+2025-11-11 09:51:59.351 | WARNING  | envy.services.tts_service.tts_engine:__init__:40 - pyttsx3 unavailable, falling back to tone synthesis: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:51:59.355 | INFO     | envy.services.tts_service.tts_engine:synthesize:52 - Synthesised speech saved to /workspace/envy/artifacts/tts/pytest.wav
+2025-11-11 09:52:05.489 | WARNING  | envy.services.wake_listener.wake_detector:__init__:33 - Vosk model path not found: models/vosk-model-small-en-us-0.15
+2025-11-11 09:52:05.491 | WARNING  | envy.services.tts_service.tts_engine:__init__:40 - pyttsx3 unavailable, falling back to tone synthesis: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:52:05.492 | INFO     | envy.skills.code_skill:_handle_create_file:40 - Created file at /workspace/envy/workspace/test.py
+2025-11-11 09:52:05.496 | INFO     | envy.services.tts_service.tts_engine:synthesize:52 - Synthesised speech saved to /workspace/envy/artifacts/tts/perf.wav

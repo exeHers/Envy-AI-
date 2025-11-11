@@ -1,0 +1,189 @@
+# Default configuration for Envy
+
+metadata:
+  version: 1
+  generated: true
+  description: >
+    Envy configuration file. Adjust values per deployment. Defaults are tuned
+    for an Intel i3 CPU with a GTX 1070 (8 GB) GPU.
+
+profiles:
+  low:
+    description: "CPU-only operation, minimal resource usage."
+    wake_listener:
+      sample_rate: 16000
+      chunk_seconds: 0.75
+      energy_threshold: 0.003
+    stt:
+      engine: "vosk"
+      streaming_chunk_ms: 750
+      enable_gpu: false
+    llm:
+      prefer: "local_rule"
+    concurrency:
+      max_skills: 1
+  balanced:
+    description: "Balanced profile for day-to-day usage (default)."
+    wake_listener:
+      sample_rate: 16000
+      chunk_seconds: 0.5
+      energy_threshold: 0.002
+    stt:
+      engine: "vosk"
+      streaming_chunk_ms: 500
+      enable_gpu: true
+    llm:
+      prefer: "llama_cpp"
+    concurrency:
+      max_skills: 2
+  power:
+    description: "Highest responsiveness. Uses more CPU/GPU."
+    wake_listener:
+      sample_rate: 22050
+      chunk_seconds: 0.35
+      energy_threshold: 0.001
+    stt:
+      engine: "vosk"
+      streaming_chunk_ms: 250
+      enable_gpu: true
+    llm:
+      prefer: "llama_cpp"
+    concurrency:
+      max_skills: 3
+
+runtime:
+  default_profile: "balanced"
+  artifacts_dir: "artifacts"
+  sessions_dir: "artifacts/sessions"
+  logs_dir: "artifacts/logs"
+  temp_dir: "artifacts/tmp"
+  ensure_directories: true
+
+messaging:
+  shared_secret: "change-me-envy"
+  router_url: "http://127.0.0.1:8203"
+  stt_url: "http://127.0.0.1:8202"
+  tts_url: "http://127.0.0.1:8205"
+  skill_manager_url: "http://127.0.0.1:8204"
+  wake_url: "http://127.0.0.1:8201"
+  dashboard_url: "http://127.0.0.1:8300"
+
+wake_listener:
+  keyword: "envy"
+  sensitivity: 0.5
+  model_path: "models/vosk-model-small-en-us-0.15"
+  buffer_seconds: 4.0
+  trigger_hold_seconds: 1.0
+  idle_sleep_seconds: 0.05
+  fallback_detector: "energy"
+  test_audio_dir: "tests/assets/audio"
+
+stt:
+  engine: "vosk"
+  model_path: "models/vosk-model-small-en-us-0.15"
+  fallback_engine: "whisper"
+  whisper_model: "models/whisper-small-q5_1.bin"
+  diarization: false
+  sample_rate: 16000
+  language: "en-US"
+
+tts:
+  engine: "pyttsx3"
+  voice: null
+  rate: 180
+  volume: 0.9
+  output_dir: "artifacts/tts"
+  play_command: "aplay"
+  optional:
+    coqui:
+      enabled: false
+      model: "models/coqui-voices/envy"
+
+llm:
+  default_strategy: "local_rule"
+  persona_prompt: >
+    You are Envy, a neutral yet slightly sardonic assistant. Be concise and
+    helpful. Confirm dangerous actions clearly.
+  llama_cpp:
+    enabled: false
+    model_path: "models/llama/ggml-model-q4_0.bin"
+    context_length: 2048
+    temperature: 0.7
+    max_tokens: 256
+    gpu_layers: 35
+  remote:
+    enabled: false
+    endpoint: "https://api.openrouter.ai/v1/chat/completions"
+    model: "openrouter/auto"
+    headers:
+      Authorization: "Bearer <replace-with-key>"
+  local_rule:
+    canned_responses:
+      fallback: "I'm thinking about that. Here's what I can do locally."
+      research: "Research mode engaged. I'll summarise what I can from local notes."
+      code: "Spinning up my code tools now."
+
+skills:
+  directory: "src/envy/skills"
+  enabled:
+    - "code_skill"
+    - "research_skill"
+    - "sys_control_skill"
+    - "reminder_skill"
+  sandbox_root: "."
+  allow_network: false
+  command_whitelist:
+    - "ls"
+    - "pwd"
+    - "cat"
+  destructive_keywords:
+    - "delete"
+    - "remove"
+    - "format"
+    - "shutdown"
+    - "reboot"
+  requires_double_confirmation:
+    - "sys_control"
+    - "code"
+
+security:
+  dashboard_confirmation: true
+  voice_confirmation: true
+  confirmation_timeout_seconds: 45
+  allow_remote_dashboard: false
+
+dashboard:
+  host: "0.0.0.0"
+  port: 8300
+  auth:
+    enabled: true
+    username: "envy"
+    password: "envy"
+
+logging:
+  level: "INFO"
+  json: false
+  rotation_mb: 10
+  retention_days: 14
+
+tests:
+  audio_wake: "tests/assets/audio/wake_only.wav"
+  audio_code_skill: "tests/assets/audio/wake_create_test.wav"
+  expected_code_skill_file: "workspace/test.py"
+  transcripts_dir: "tests/assets/transcripts"
+
+packaging:
+  output_zip: "envy-ready.zip"
+  include_dirs:
+    - "config"
+    - "scripts"
+    - "src/envy"
+    - "models"
+    - "tests/assets"
+  include_files:
+    - "run_envy_local.sh"
+    - "run_envy_local.bat"
+    - "install_envy.sh"
+    - "install_envy.bat"
+    - "README.md"
+    - "LICENSE"

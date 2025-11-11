@@ -1,0 +1,21 @@
+Cursor Build Log – Envy
+=======================
+
+Timestamp (UTC): 2025-11-11T09:52:30Z
+
+Acceptance Criteria
+-------------------
+- [PASS] Wake word detected from test audio (`tests/acceptance/test_pipeline.py::test_wake_word_detection`)
+- [PASS] CodeSkill created `workspace/test.py` with `print("hello from envy")`
+- [PASS] TTS synthesised audio (`artifacts/tts/pytest.wav`)
+- [PASS] Router/LLM fallback produced rule-based response
+- [PASS] Automated tests (pytest) completed without failures
+- [PASS] Performance report generated at `artifacts/perf-report.txt`
+- [PASS] Final package `envy-ready.zip` created
+
+Artifacts
+---------
+- Install log: `artifacts/install-log.txt`
+- Test log: `artifacts/tests/acceptance-log.jsonl`
+- Performance report: `artifacts/perf-report.txt`
+- Ready bundle: `envy-ready.zip`

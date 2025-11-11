@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envy Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Envy Control</h1>
+    <p>Profile: {{ profile }}</p>
+  </header>
+
+  <main>
+    <section id="status">
+      <h2>Service Status</h2>
+      <div id="status-grid"></div>
+    </section>
+
+    <section id="sessions">
+      <h2>Recent Sessions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Session ID</th>
+            <th>Intent</th>
+            <th>Skill</th>
+            <th>Transcript</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="sessions-body"></tbody>
+      </table>
+    </section>
+
+    <section id="confirmation">
+      <h2>Confirm Pending Action</h2>
+      <form id="confirm-form">
+        <label for="action-id">Action ID</label>
+        <input type="text" id="action-id" name="action_id" required>
+        <label for="channel">Channel</label>
+        <select id="channel" name="channel">
+          <option value="dashboard">Dashboard</option>
+          <option value="voice">Voice</option>
+        </select>
+        <button type="submit">Confirm</button>
+      </form>
+      <pre id="confirm-result"></pre>
+    </section>
+
+    <section id="logs">
+      <h2>Latest Logs</h2>
+      <pre id="logs-output"></pre>
+    </section>
+  </main>
+
+  <script>
+    window.ENVY_SECRET = "{{ config.get('messaging.shared_secret', 'change-me-envy') }}";
+  </script>
+  <script src="/static/dashboard.js" defer></script>
+</body>
+</html>

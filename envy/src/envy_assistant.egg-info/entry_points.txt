@@ -1,0 +1,2 @@
+[console_scripts]
+envy-process-manager = envy.scripts.process_manager:main

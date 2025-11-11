@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-11-11T09:52:05.497215Z",
+  "profile": "balanced",
+  "cpu_before_percent": 61.2,
+  "cpu_after_percent": 22.2,
+  "memory_before": {
+    "total": 16795742208,
+    "available": 16007385088,
+    "percent": 4.7,
+    "used": 788357120,
+    "free": 9149464576,
+    "active": 327114752,
+    "inactive": 6719393792,
+    "buffers": 131297280,
+    "cached": 7072759808,
+    "shared": 1114112,
+    "slab": 557944832
+  },
+  "memory_after": {
+    "total": 16795742208,
+    "available": 16004300800,
+    "percent": 4.7,
+    "used": 791441408,
+    "free": 9146380288,
+    "active": 327114752,
+    "inactive": 6722002944,
+    "buffers": 131305472,
+    "cached": 7072751616,
+    "shared": 1114112,
+    "slab": 557944832
+  },
+  "gpu": {
+    "gpu_available": false
+  },
+  "session": {
+    "wake_detected": true,
+    "transcript": "Envy, create test.py that prints hello.",
+    "intent": "code.create_file",
+    "skill_success": true,
+    "llm_engine": "rule-based",
+    "tts_engine": "tone-fallback",
+    "duration_seconds": 0.004472159082069993
+  }
+}

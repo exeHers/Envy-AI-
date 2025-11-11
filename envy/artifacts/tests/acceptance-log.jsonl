@@ -1,0 +1,16 @@
+{"event": "wake_word", "audio": "/workspace/envy/tests/assets/audio/wake_only.wav"}
+{"event": "stt", "text": "Envy, create test.py that prints hello.", "engine": "fallback-transcript"}
+{"event": "intent", "intent": "code.create_file", "skill": "code_skill", "parameters": {"file_path": "test.py"}}
+{"event": "tts", "path": "/workspace/envy/artifacts/tts/pytest.wav", "engine": "tone-fallback"}
+{"event": "llm_fallback", "engine": "rule-based", "text": "I'm thinking about that. Here's what I can do locally."}
+{"event": "stt", "text": "Envy, create test.py that prints hello.", "engine": "fallback-transcript"}
+{"event": "intent", "intent": "code.create_file", "skill": "code_skill", "parameters": {"file_path": "test.py"}}
+{"event": "stt", "text": "Envy, create test.py that prints hello.", "engine": "fallback-transcript"}
+{"event": "intent", "intent": "code.create_file", "skill": "code_skill", "parameters": {"file_path": "test.py"}}
+{"event": "code_skill", "path": "/workspace/envy/workspace/test.py", "content": "print(\"hello from envy\")"}
+{"event": "wake_word", "audio": "/workspace/envy/tests/assets/audio/wake_only.wav"}
+{"event": "stt", "text": "Envy, create test.py that prints hello.", "engine": "fallback-transcript"}
+{"event": "intent", "intent": "code.create_file", "skill": "code_skill", "parameters": {"file_path": "test.py"}}
+{"event": "code_skill", "path": "/workspace/envy/workspace/test.py", "content": "print(\"hello from envy\")"}
+{"event": "tts", "path": "/workspace/envy/artifacts/tts/pytest.wav", "engine": "tone-fallback"}
+{"event": "llm_fallback", "engine": "rule-based", "text": "I'm thinking about that. Here's what I can do locally."}
