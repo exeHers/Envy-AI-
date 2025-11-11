@@ -1,0 +1,111 @@
+# Envy Personal Assistant Configuration
+# Resource profiles: low, balanced, power
+
+profile: balanced
+
+# Wake word settings
+wake:
+  keyword: "envy"
+  sensitivity: 0.5
+  model_path: "models/vosk-model-small-en-us-0.15"
+  continuous_listening: true
+  timeout_seconds: 30
+
+# Speech-to-Text settings
+stt:
+  engine: "whisper"  # Options: vosk, whisper, whisperx
+  model_size: "small"  # tiny, base, small, medium, large
+  model_path: "models/whisper-small"
+  use_gpu: true
+  device: "cuda"  # cuda, cpu
+  language: "en"
+  streaming: true
+
+# Text-to-Speech settings
+tts:
+  engine: "pyttsx3"  # Options: pyttsx3, coqui
+  voice_id: null  # null = system default
+  rate: 150
+  volume: 0.9
+  streaming: true
+
+# LLM Adapter settings
+llm:
+  primary: "local"  # local, remote_free, disabled
+  local:
+    engine: "llama.cpp"  # llama.cpp, onnx, ggml
+    model_path: "models/llama-2-7b-chat-q4_0.gguf"
+    context_size: 2048
+    n_gpu_layers: 20  # Use GPU layers if available
+    n_threads: 4
+    temperature: 0.7
+    max_tokens: 512
+  remote_free:
+    enabled: false
+    endpoint: "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium"
+    api_key: ""  # Optional, leave empty for free tier
+    timeout: 10
+    fallback_on_error: true
+
+# Router settings
+router:
+  intent_classifier: "rule_based"  # rule_based, ml
+  confidence_threshold: 0.6
+  max_retries: 3
+  timeout_seconds: 30
+
+# Skill settings
+skills:
+  enabled:
+    - CodeSkill
+    - ResearchSkill
+    - SysControlSkill
+    - ReminderSkill
+  sandbox:
+    enabled: true
+    allowed_commands:
+      - "python"
+      - "python3"
+      - "echo"
+      - "mkdir"
+      - "touch"
+      - "cat"
+      - "ls"
+      - "pwd"
+    blocked_commands:
+      - "rm"
+      - "rmdir"
+      - "del"
+      - "format"
+      - "shutdown"
+      - "reboot"
+    require_confirmation: true
+
+# Web dashboard settings
+web:
+  host: "0.0.0.0"
+  port: 8080
+  enable_cors: true
+  debug: false
+
+# Resource limits
+resources:
+  max_cpu_percent: 70
+  max_memory_mb: 4096
+  max_gpu_memory_mb: 6144  # Leave 2GB for system on 8GB card
+  worker_timeout: 30
+
+# Security settings
+security:
+  require_voice_confirmation: true
+  require_dashboard_confirmation: true
+  log_all_commands: true
+  audit_log_path: "artifacts/audit.log"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "artifacts/envy.log"
+  console: true
+  max_file_size_mb: 10
+  backup_count: 5

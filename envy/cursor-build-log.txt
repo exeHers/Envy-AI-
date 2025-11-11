@@ -1,0 +1,42 @@
+============================================================
+Envy Build Log
+Timestamp: 2025-11-11 09:21:04
+============================================================
+
+✓ PASS: envy-ready.zip exists
+  Location: /workspace/envy/envy-ready.zip
+  Size: 0.05 MB
+
+⚠ WARNING: Test results not found
+
+Key Files:
+  ✓ src/main.py - Main orchestrator
+  ✓ config/envy.yaml - Configuration
+  ✓ install_envy.sh - Linux installer
+  ✓ install_envy.bat - Windows installer
+  ✓ run_envy_local.sh - Linux runner
+  ✓ run_envy_local.bat - Windows runner
+  ✓ README.md - Documentation
+  ✓ LICENSE - License
+
+Skills: 5 found
+  - ReminderSkill.py
+  - CodeSkill.py
+  - base_skill.py
+  - SysControlSkill.py
+  - ResearchSkill.py
+
+Acceptance Criteria:
+  [ ] Wake word detection test
+  [✗] CodeSkill test file not created
+  [ ] TTS output not found
+  [ ] Router used LLMAdapter
+  [✓] envy-ready.zip exists
+  [✓] Package contains run_envy_local.sh
+  [✓] Package contains install_envy.sh
+  [✓] Package contains config/envy.yaml
+  [✓] Test logs exist
+
+============================================================
+Build log complete
+============================================================
