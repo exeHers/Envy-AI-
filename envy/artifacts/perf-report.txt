@@ -1,0 +1,29 @@
+Generated: Tue Nov 11 09:29:47 AM UTC 2025
+
+System Information:
+  OS: Linux 6.1.147
+  CPU: Intel(R) Xeon(R) Processor
+  Memory: 15Gi
+  GPU: None detected
+
+Python Environment:
+  Python: Python 3.12.3
+
+Envy Metrics:
+  Status: Not running
+  Note: Start Envy to measure runtime performance
+
+Estimated Resource Requirements:
+  Profile: Balanced
+  CPU: ~40-60% (4 threads)
+  RAM: ~2-4 GB
+  GPU VRAM: ~2-4 GB (if using GPU)
+  Wake-word listener: ~5-10% CPU (idle)
+
+Typical Latency:
+  Wake word detection: ~100-300ms
+  Speech-to-text (5s audio): ~500-2000ms
+  LLM inference: ~500-3000ms (depends on model)
+  Text-to-speech: ~100-500ms
+  Total (wake → response): ~2-6 seconds
+

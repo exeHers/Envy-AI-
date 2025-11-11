@@ -1,0 +1,113 @@
+2025-11-11 09:29:07 - STTService - INFO - Loading Whisper model: base
+2025-11-11 09:29:07 - STTService - ERROR - Failed to initialize Whisper model: No module named 'torch'
+2025-11-11 09:29:07 - STTService - INFO - Attempting fallback to CPU with int8...
+2025-11-11 09:29:07 - STTService - INFO - Whisper model loaded (CPU fallback)
+2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:07 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:07 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:07 - LLMAdapter - WARNING - Using fallback responses (no LLM available)
+2025-11-11 09:29:07 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:07 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:07 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:07 - SkillManager - INFO - Executing skill: CodeSkill.create_file with params: {'filename': 'test.py', 'description': 'create test.py that prints hello'}
+2025-11-11 09:29:07 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:07 - SkillManager - INFO - Executing skill: ResearchSkill.research with params: {'query': 'research quantum computing', 'topic': 'quantum computing'}
+2025-11-11 09:29:07 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:07 - Router - INFO - Initializing router...
+2025-11-11 09:29:07 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:07 - Router - INFO - Router initialized (LLM: False, TTS: False)
+2025-11-11 09:29:07 - Router - INFO - Processing request: Create a file called hello.py
+2025-11-11 09:29:07 - Router - INFO - Intent: {'skill': 'CodeSkill', 'confidence': 0.9, 'action': 'create_file', 'params': {'filename': 'called'}}
+2025-11-11 09:29:07 - SkillManager - INFO - Executing skill: CodeSkill.create_file with params: {'filename': 'called'}
+2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:07 - TTSService - ERROR - TTS engine not initialized
+2025-11-11 09:29:07 - Router - INFO - Response: Created file called in workspace
+2025-11-11 09:29:07 - WakeListener - WARNING - VOSK model not found at /workspace/envy/models/vosk-model-small-en-us-0.15, using fallback
+2025-11-11 09:29:17 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:17 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:18 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:18 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:18 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:18 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:40 - STTService - INFO - Loading Whisper model: base
+2025-11-11 09:29:40 - STTService - ERROR - Failed to initialize Whisper model: No module named 'torch'
+2025-11-11 09:29:40 - STTService - INFO - Attempting fallback to CPU with int8...
+2025-11-11 09:29:40 - STTService - INFO - Whisper model loaded (CPU fallback)
+2025-11-11 09:29:40 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:40 - TTSService - INFO - Using voice: Afrikaans
+2025-11-11 09:29:40 - TTSService - INFO - TTS engine initialized successfully
+2025-11-11 09:29:40 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:40 - TTSService - INFO - Using voice: Afrikaans
+2025-11-11 09:29:40 - TTSService - INFO - TTS engine initialized successfully
+2025-11-11 09:29:40 - TTSService - INFO - Saving TTS to file: /workspace/envy/artifacts/tests/tts-output.wav
+2025-11-11 09:29:40 - TTSService - INFO - TTS saved to: /workspace/envy/artifacts/tests/tts-output.wav
+2025-11-11 09:29:40 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:40 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:40 - LLMAdapter - WARNING - Using fallback responses (no LLM available)
+2025-11-11 09:29:40 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:40 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:40 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:40 - SkillManager - INFO - Executing skill: CodeSkill.create_file with params: {'filename': 'test.py', 'description': 'create test.py that prints hello'}
+2025-11-11 09:29:40 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:40 - SkillManager - INFO - Executing skill: ResearchSkill.research with params: {'query': 'research quantum computing', 'topic': 'quantum computing'}
+2025-11-11 09:29:40 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:40 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:40 - Router - INFO - Initializing router...
+2025-11-11 09:29:40 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:40 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:40 - TTSService - INFO - Using voice: Afrikaans
+2025-11-11 09:29:40 - TTSService - INFO - TTS engine initialized successfully
+2025-11-11 09:29:40 - Router - INFO - Router initialized (LLM: False, TTS: True)
+2025-11-11 09:29:40 - Router - INFO - Processing request: Create a file called hello.py
+2025-11-11 09:29:40 - Router - INFO - Intent: {'skill': 'CodeSkill', 'confidence': 0.9, 'action': 'create_file', 'params': {'filename': 'called'}}
+2025-11-11 09:29:40 - SkillManager - INFO - Executing skill: CodeSkill.create_file with params: {'filename': 'called'}
+2025-11-11 09:29:40 - TTSService - INFO - Speaking: Created file called in workspace
+2025-11-11 09:29:40 - Router - INFO - Response: Created file called in workspace
+2025-11-11 09:29:40 - WakeListener - WARNING - VOSK model not found at /workspace/envy/models/vosk-model-small-en-us-0.15, using fallback

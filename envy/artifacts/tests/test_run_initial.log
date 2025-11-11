@@ -1,0 +1,111 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.0, pluggy-1.6.0 -- /workspace/envy/venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /workspace/envy
+plugins: anyio-4.11.0, asyncio-1.3.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 12 items
+
+tests/test_acceptance.py::TestAcceptance::test_config_loads ✓ Configuration loads correctly
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_stt_initialization 2025-11-11 09:29:07 - STTService - INFO - Loading Whisper model: base
+2025-11-11 09:29:07 - STTService - ERROR - Failed to initialize Whisper model: No module named 'torch'
+2025-11-11 09:29:07 - STTService - INFO - Attempting fallback to CPU with int8...
+2025-11-11 09:29:07 - STTService - INFO - Whisper model loaded (CPU fallback)
+✓ STT service initializes
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_tts_initialization 2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+FAILED
+tests/test_acceptance.py::TestAcceptance::test_tts_synthesis 2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+FAILED
+tests/test_acceptance.py::TestAcceptance::test_llm_adapter_initialization 2025-11-11 09:29:07 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+✓ LLM adapter initializes
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_llm_adapter_generate 2025-11-11 09:29:07 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:07 - LLMAdapter - WARNING - Using fallback responses (no LLM available)
+✓ LLM generated response: Hello! How can I assist you today?
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_llm_intent_classification 2025-11-11 09:29:07 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+✓ Intent classified: {'skill': 'CodeSkill', 'confidence': 0.9, 'action': 'create_file', 'params': {'filename': 'called'}}
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_skill_manager_loads_skills 2025-11-11 09:29:07 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded 4 skills
+✓ Loaded 4 skills: ['CodeSkill', 'ResearchSkill', 'SysControlSkill', 'ReminderSkill']
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_code_skill_creates_file 2025-11-11 09:29:07 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:07 - SkillManager - INFO - Executing skill: CodeSkill.create_file with params: {'filename': 'test.py', 'description': 'create test.py that prints hello'}
+✓ CodeSkill created file: /workspace/envy/workspace/test.py
+  Content: #!/usr/bin/env python3
+
+print("hello from envy")
+
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_research_skill_creates_summary 2025-11-11 09:29:07 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:07 - SkillManager - INFO - Executing skill: ResearchSkill.research with params: {'query': 'research quantum computing', 'topic': 'quantum computing'}
+✓ ResearchSkill created summary: /workspace/envy/workspace/research_quantum_computing_20251111_092907.md
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_router_processes_request 2025-11-11 09:29:07 - SkillManager - INFO - Loading skills...
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: CodeSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ResearchSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: SysControlSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded skill: ReminderSkill
+2025-11-11 09:29:07 - SkillManager - INFO - Loaded 4 skills
+2025-11-11 09:29:07 - Router - INFO - Initializing router...
+2025-11-11 09:29:07 - LLMAdapter - WARNING - llama-cpp-python not installed, using fallback
+2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:07 - Router - INFO - Router initialized (LLM: False, TTS: False)
+2025-11-11 09:29:07 - Router - INFO - Processing request: Create a file called hello.py
+2025-11-11 09:29:07 - Router - INFO - Intent: {'skill': 'CodeSkill', 'confidence': 0.9, 'action': 'create_file', 'params': {'filename': 'called'}}
+2025-11-11 09:29:07 - SkillManager - INFO - Executing skill: CodeSkill.create_file with params: {'filename': 'called'}
+2025-11-11 09:29:07 - TTSService - INFO - Initializing TTS engine (pyttsx3)...
+2025-11-11 09:29:07 - TTSService - ERROR - Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+2025-11-11 09:29:07 - TTSService - ERROR - TTS engine not initialized
+2025-11-11 09:29:07 - Router - INFO - Response: Created file called in workspace
+✓ Router processed request: Created file called in workspace
+PASSED
+tests/test_acceptance.py::TestAcceptance::test_wake_word_detection_placeholder 2025-11-11 09:29:07 - WakeListener - WARNING - VOSK model not found at /workspace/envy/models/vosk-model-small-en-us-0.15, using fallback
+✓ Wake listener can be instantiated
+PASSED
+
+=================================== FAILURES ===================================
+____________________ TestAcceptance.test_tts_initialization ____________________
+tests/test_acceptance.py:110: in test_tts_initialization
+    assert tts_service.engine is not None
+E   assert None is not None
+E    +  where None = <services.tts_service.TTSService object at 0x7fd3d9c33a40>.engine
+------------------------------ Captured log setup ------------------------------
+INFO     TTSService:tts_service.py:30 Initializing TTS engine (pyttsx3)...
+ERROR    TTSService:tts_service.py:47 Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+______________________ TestAcceptance.test_tts_synthesis _______________________
+tests/test_acceptance.py:123: in test_tts_synthesis
+    assert result is True
+E   assert False is True
+------------------------------ Captured log setup ------------------------------
+INFO     TTSService:tts_service.py:30 Initializing TTS engine (pyttsx3)...
+ERROR    TTSService:tts_service.py:47 Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+------------------------------ Captured log call -------------------------------
+INFO     TTSService:tts_service.py:30 Initializing TTS engine (pyttsx3)...
+ERROR    TTSService:tts_service.py:47 Failed to initialize TTS engine: This means you probably do not have eSpeak or eSpeak-ng installed!
+=========================== short test summary info ============================
+FAILED tests/test_acceptance.py::TestAcceptance::test_tts_initialization - as...
+FAILED tests/test_acceptance.py::TestAcceptance::test_tts_synthesis - assert ...
+========================= 2 failed, 10 passed in 0.13s =========================

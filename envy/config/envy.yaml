@@ -1,0 +1,125 @@
+# Envy Personal Assistant Configuration
+# Profile: balanced (low, balanced, power)
+
+# System profile determines resource allocation
+profile: balanced  # Options: low, balanced, power
+
+# Wake word detection
+wake_word:
+  enabled: true
+  keyword: "envy"
+  model_path: "models/vosk-model-small-en-us-0.15"
+  sensitivity: 0.5  # 0.0-1.0, higher = more sensitive
+  sample_rate: 16000
+  
+# Speech-to-Text
+stt:
+  engine: "faster-whisper"  # Options: faster-whisper, vosk
+  model_size: "base"  # Options: tiny, base, small (for resource constraints)
+  device: "auto"  # Options: cpu, cuda, auto
+  compute_type: "int8"  # Options: float16, int8 (int8 for low memory)
+  language: "en"
+  beam_size: 5
+  
+# Text-to-Speech
+tts:
+  engine: "pyttsx3"  # Options: pyttsx3, coqui (pyttsx3 is lighter)
+  rate: 175  # Words per minute
+  volume: 0.9  # 0.0-1.0
+  voice_index: 0  # System voice index
+  
+# LLM Adapter
+llm:
+  # Primary: local model (recommended for privacy)
+  local:
+    enabled: true
+    model_path: "models/llama-2-7b-chat.Q4_K_M.gguf"
+    n_ctx: 2048
+    n_threads: 4  # Adjust for your CPU
+    n_gpu_layers: 20  # Use GPU if available (0 for CPU only)
+    max_tokens: 512
+    temperature: 0.7
+    
+  # Fallback: free remote endpoints (opt-in, disabled by default)
+  remote:
+    enabled: false  # Set to true to use free remote LLM as fallback
+    provider: "none"  # Options: none, huggingface-inference (free tier)
+    api_url: ""
+    api_key: ""  # Not required for free endpoints
+    model: ""
+    
+# Router and intent classification
+router:
+  use_local_classifier: true
+  confidence_threshold: 0.7
+  timeout: 30  # seconds
+  
+# Skill Manager
+skills:
+  enabled_skills:
+    - CodeSkill
+    - ResearchSkill
+    - SysControlSkill
+    - ReminderSkill
+  timeout: 60  # seconds per skill execution
+  require_confirmation:
+    - SysControlSkill  # Always require confirmation for system actions
+  sandboxed: true
+  workspace_path: "workspace"
+  
+# System Control (security settings)
+sys_control:
+  whitelist_commands:
+    - "ls"
+    - "pwd"
+    - "date"
+    - "echo"
+  require_voice_confirmation: true
+  require_dashboard_confirmation: true
+  max_command_length: 200
+  
+# Web Dashboard
+web:
+  enabled: true
+  host: "127.0.0.1"
+  port: 8080
+  log_retention_hours: 24
+  
+# Resource limits (per profile)
+resources:
+  low:
+    max_cpu_percent: 40
+    max_memory_mb: 2048
+    stt_model: "tiny"
+    llm_threads: 2
+    llm_gpu_layers: 0
+  balanced:
+    max_cpu_percent: 60
+    max_memory_mb: 4096
+    stt_model: "base"
+    llm_threads: 4
+    llm_gpu_layers: 20
+  power:
+    max_cpu_percent: 80
+    max_memory_mb: 8192
+    stt_model: "small"
+    llm_threads: 6
+    llm_gpu_layers: 35
+    
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "logs/envy.log"
+  max_size_mb: 100
+  backup_count: 3
+  
+# Voice persona
+persona:
+  style: "neutral"  # neutral, friendly, sardonic
+  verbosity: "concise"  # concise, normal, detailed
+  
+# Startup behavior
+startup:
+  auto_start_services: true
+  check_models_on_start: true
+  run_self_test: false
