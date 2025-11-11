@@ -1,0 +1,21 @@
+2025-11-11 09:51:28,447 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:51:30,137 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:51:30,137 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:51:30,641 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:51:30,641 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:51:30,641 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:52:34,297 | INFO | envy.stt_service | Loaded STT model from models/vosk-stt
+2025-11-11 09:52:34,575 | INFO | envy.wake_listener | Loaded VOSK wake model from models/vosk-wake
+2025-11-11 09:52:34,578 | INFO | envy.services.orchestrator | Wake word detected from simulation (confidence 0.90)
+2025-11-11 09:52:34,581 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:52:35,386 | INFO | envy.stt_service | Loaded STT model from models/vosk-stt
+2025-11-11 09:52:35,654 | INFO | envy.wake_listener | Loaded VOSK wake model from models/vosk-wake
+2025-11-11 09:52:35,656 | INFO | envy.services.orchestrator | Wake word detected from simulation (confidence 0.90)
+2025-11-11 09:52:36,429 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:52:37,220 | INFO | envy.stt_service | Loaded STT model from models/vosk-stt
+2025-11-11 09:52:37,486 | INFO | envy.wake_listener | Loaded VOSK wake model from models/vosk-wake
+2025-11-11 09:52:37,489 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.
+2025-11-11 09:52:47,055 | INFO | envy.stt_service | Loaded STT model from models/vosk-stt
+2025-11-11 09:52:47,322 | INFO | envy.wake_listener | Loaded VOSK wake model from models/vosk-wake
+2025-11-11 09:52:47,425 | INFO | envy.services.orchestrator | Wake word detected from simulation (confidence 0.90)
+2025-11-11 09:52:47,428 | WARNING | envy.tts_service | pyttsx3 init failed (This means you probably do not have eSpeak or eSpeak-ng installed!); writing text fallback.

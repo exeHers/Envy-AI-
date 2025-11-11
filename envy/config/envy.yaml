@@ -1,0 +1,44 @@
+# Envy configuration file
+profile: balanced
+
+audio:
+  wake_model_path: models/vosk-wake
+  stt_model_path: models/vosk-stt
+  sample_rate: 16000
+  chunk_size: 2048
+  enable_streaming: true
+
+llm:
+  default_backend: rule
+  local_model_path: models/ggml-envy-q4_0.gguf
+  persona: sardonic
+  temperature: 0.2
+  max_tokens: 256
+  remote_endpoint: null
+  remote_api_key_env: null
+
+skills:
+  whitelist:
+    code: true
+    research: true
+    reminder: true
+    sys_control: false
+  requires_confirmation:
+    sys_control: true
+
+security:
+  destructive_confirmation: true
+  dashboard_double_confirm: true
+  command_whitelist:
+    "sudo systemctl restart envy": false
+    "shutdown now": false
+
+dashboard:
+  host: 0.0.0.0
+  port: 8190
+  enable_https: false
+  auth_token_env: ENVY_DASHBOARD_TOKEN
+
+data_dir: data
+artifacts_dir: artifacts
+skills_dir: skills

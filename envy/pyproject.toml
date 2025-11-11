@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "envy-assistant"
+version = "0.1.0"
+description = "Envy: a Jarvis-style personal assistant for local hardware."
+authors = [{ name = "Cursor Generated" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29.0",
+    "sounddevice>=0.4.6",
+    "vosk>=0.3.45",
+    "numpy>=1.24",
+    "aiohttp>=3.9.0",
+    "pyttsx3>=2.90",
+    "psutil>=5.9.0",
+    "PyYAML>=6.0",
+    "typer>=0.12.0",
+    "jinja2>=3.1.2",
+]
+
+[project.optional-dependencies]
+llama = ["llama-cpp-python>=0.2.73"]
+audio = ["simpleaudio>=1.0.4"]
+dev = ["pytest>=8.0.0", "pytest-asyncio>=0.23.0", "httpx>=0.27.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

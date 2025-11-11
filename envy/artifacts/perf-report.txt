@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-11-11T09:52:47.528780",
+  "wake_word": "simulated",
+  "cpu_percent_before": 0.0,
+  "cpu_percent_after": 0.0,
+  "memory_percent_before": 6.2,
+  "memory_percent_after": 6.2,
+  "gpu": {
+    "available": false
+  },
+  "latency_seconds": 0.002623,
+  "outcome": "Created /workspace/envy/workspace/test.py"
+}

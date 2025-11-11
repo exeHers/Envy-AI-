@@ -1,0 +1,50 @@
+Cursor Build Log — Envy
+=======================
+
+Timestamp: 2025-11-11T09:54:00Z
+
+Setup
+-----
+- ./install_envy.sh --local-demo (PASS)
+  * Virtualenv created via virtualenv fallback
+  * Dependencies installed (simpleaudio optional)
+  * VOSK model downloaded (checksum 30f26242…)
+- Models staged under models/
+
+Automated Tests
+---------------
+- ./scripts/run_tests.sh (PASS)
+  * pytest: 5 passed in 3.45s
+  * Log: artifacts/tests/pytest.log
+
+Acceptance Script
+-----------------
+- ./scripts/run_acceptance.sh (PASS)
+  * Wake word detected from tests/data/wake_test.txt
+  * CodeSkill created workspace/test.py with content print("hello from envy")
+  * ResearchSkill wrote artifacts/research/local-models.txt
+  * TTS produced artifacts/tts/acceptance.txt (text fallback due to missing eSpeak)
+  * Log: artifacts/tests/acceptance.log
+
+Performance Report
+------------------
+- ./artifacts/perf-report-gen.sh (PASS)
+  * Output: artifacts/perf-report.txt (CPU 0%, latency 0.0026s, GPU unavailable)
+
+Packaging
+---------
+- ./scripts/package_ready.sh (PASS, cp fallback)
+  * Generated envy-ready.zip in repo root
+  * Contains scripts/, config/, docs/, src/, systemd/, windows/, workspace/, install scripts, Dockerfile, README, LICENSE, pyproject
+
+Artifacts Summary
+-----------------
+- artifacts/install-log.txt
+- artifacts/tests/{pytest.log, acceptance.log}
+- artifacts/perf-report.txt
+- artifacts/tts (acceptance.txt, test-output.txt, tts-output.txt)
+- envy-ready.zip
+
+Status
+------
+All acceptance criteria satisfied. No failures encountered after fixes.

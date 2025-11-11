@@ -1,0 +1,16 @@
+[Unit]
+Description=Envy Personal Assistant
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/envy
+EnvironmentFile=/opt/envy/envy.env
+ExecStart=/opt/envy/run_envy_local.sh --profile balanced --headless
+Restart=always
+RestartSec=5
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
