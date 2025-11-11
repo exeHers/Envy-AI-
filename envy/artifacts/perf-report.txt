@@ -1,0 +1,42 @@
+=========================================
+Envy Performance Report
+Generated: Tue Nov 11 09:30:15 AM UTC 2025
+=========================================
+
+System Information:
+-------------------
+Linux cursor 6.1.147 #1 SMP PREEMPT_DYNAMIC Tue Aug  5 21:01:56 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+
+CPU Information:
+----------------
+CPU(s):                                  4
+On-line CPU(s) list:                     0-3
+Model name:                              Intel(R) Xeon(R) Processor
+Thread(s) per core:                      1
+NUMA node0 CPU(s):                       0-3
+
+Memory Information:
+-------------------
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       691Mi       9.0Gi       1.1Mi       6.3Gi        14Gi
+Swap:             0B          0B          0B
+
+GPU Information:
+----------------
+nvidia-smi not available (no NVIDIA GPU detected)
+
+Process Information:
+--------------------
+Envy is not currently running
+
+Estimated Latency Metrics:
+--------------------------
+Wake word detection: ~100-200ms (VOSK)
+STT processing: ~1-3s (Whisper base model)
+LLM inference: 2-10s (depending on model and hardware)
+TTS synthesis: ~0.5-1s (pyttsx3)
+Total wake->response: ~4-15s (typical)
+
+=========================================
+Report saved to: /workspace/envy/artifacts/perf-report.txt
+=========================================

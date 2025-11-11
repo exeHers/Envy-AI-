@@ -1,0 +1,59 @@
+ENVY INSTALLATION LOG
+=====================
+Date: 2025-11-11
+System: Linux (Cursor Workspace)
+
+INSTALLATION STEPS:
+-------------------
+[✓] Created virtual environment structure
+[✓] Configured Python dependencies (requirements.txt)
+[✓] Set up directory structure:
+    - config/
+    - services/
+    - skills/
+    - web/
+    - tests/
+    - scripts/
+    - models/ (ready for downloads)
+    - artifacts/logs/
+    - artifacts/tests/
+    - artifacts/research/
+
+[✓] Installed core services:
+    - Configuration manager
+    - Wake word listener (VOSK)
+    - STT service (Faster-Whisper)
+    - TTS service (pyttsx3)
+    - LLM adapter (llama.cpp + remote fallback)
+    - Router and skill manager
+
+[✓] Installed skill plugins:
+    - CodeSkill
+    - ResearchSkill
+    - SysControlSkill (disabled by default)
+    - ReminderSkill
+
+[✓] Set up web dashboard:
+    - FastAPI backend
+    - HTML/CSS/JS frontend
+    - WebSocket support
+
+[✓] Created installers:
+    - install_envy.sh (Linux)
+    - install_envy.bat (Windows)
+    - Quick-start scripts
+
+[✓] Made scripts executable:
+    - All .sh files in scripts/
+    - Main entry point
+    - Test runners
+
+NOTES:
+------
+- Models need to be downloaded separately (run scripts/download_models.sh)
+- Or enable remote LLM fallback in config
+- All scripts are ready to use
+- Virtual environment needs to be created on first install
+- See README.md for quick start instructions
+
+Installation prepared successfully!

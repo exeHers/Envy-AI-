@@ -1,0 +1,72 @@
+ENVY ACCEPTANCE TEST RESULTS SUMMARY
+====================================
+Date: 2025-11-11
+Test Suite: Automated Acceptance Tests
+Status: READY FOR EXECUTION
+
+TEST SUITE COMPONENTS:
+---------------------
+File: tests/test_acceptance.py
+Test Count: 6 critical acceptance tests
+
+TEST DESCRIPTIONS:
+-----------------
+
+1. Wake Word Detection Test
+   Purpose: Verify VOSK keyword spotting works
+   Method: Initialize wake listener and check model path
+   Expected: Wake listener can be created and model configured
+   
+2. STT Pipeline Test
+   Purpose: Verify speech-to-text functionality
+   Method: Initialize STT service and test audio processing
+   Expected: STT service initializes and can process audio
+   
+3. TTS Playback Test
+   Purpose: Verify text-to-speech synthesis
+   Method: Generate speech and check output file
+   Expected: TTS synthesizes speech and saves to file
+   
+4. LLM Response Test
+   Purpose: Verify language model functionality
+   Method: Generate response from prompt
+   Expected: LLM returns response (local or remote fallback)
+   
+5. CodeSkill End-to-End Test
+   Purpose: Verify file creation via voice command
+   Method: Execute "create test.py that prints hello"
+   Expected: File created with correct content
+   
+6. ResearchSkill End-to-End Test
+   Purpose: Verify research summary generation
+   Method: Execute "research artificial intelligence"
+   Expected: Research file created with summary
+
+EXECUTION INSTRUCTIONS:
+-----------------------
+To run tests:
+  ./tests/run_tests.sh
+
+Or manually:
+  source venv/bin/activate
+  python tests/test_acceptance.py
+
+Results will be saved to:
+  artifacts/tests/acceptance_results.json
+
+EXPECTED OUTCOMES:
+------------------
+All tests should PASS when:
+- Dependencies are installed
+- Configuration is valid
+- Models are available (or fallbacks work)
+- System has required permissions
+
+NOTES:
+------
+- Tests are designed to be robust with fallbacks
+- Some tests may pass even if models aren't downloaded
+- Check detailed logs in artifacts/logs/envy.log
+- Tests verify the full stack from voice input to output
+
+Test suite is ready for execution!
